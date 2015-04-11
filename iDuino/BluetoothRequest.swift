@@ -45,7 +45,6 @@ class BluetoothRequest {
   var componentType: Component!
   var value: Value!
   var pin: Pin!
-  var byteString: UInt8!
   
   
   // Variables shared between instances to show pin avaiability
@@ -55,7 +54,7 @@ class BluetoothRequest {
   
   var description: String {
     get {
-      return "Type: \(self.componentType), Value: \(self.value), at Pin: \(self.pin), \(self.byteString)"
+      return "Type: \(self.componentType), Value: \(self.value), at Pin: \(self.pin), \(self.generateByteString())"
     }
   }
   
@@ -90,7 +89,6 @@ class BluetoothRequest {
     
     if selectFrom.count > 0 {
       request.pin = selectFrom.first
-      request.byteString = request.generateByteString()
     } else {
       request.componentType = .None
       request.pin = .None
@@ -105,7 +103,7 @@ class BluetoothRequest {
     availableSound = [.D12]
   }
   
-  private func generateByteString() -> UInt8 {
+  func generateByteString() -> UInt8 {
     var byte: UInt8 = 0b00000000
     
     // Assign Pin
