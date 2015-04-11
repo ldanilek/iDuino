@@ -10,7 +10,7 @@ import UIKit
 
 typealias ProgramElement = (String, Type, Double)
 
-class ProgramTableViewController: UITableViewController {
+class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     var program: [ProgramElement] = []
 
@@ -23,6 +23,18 @@ class ProgramTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func cancelAdd() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func addElement(program: ProgramElement?, remote: RemoteElement?) {
+        if let theProgram = program {
+            self.program.append(theProgram)
+            self.tableView.reloadData()
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func addButtonPressed() {
@@ -39,24 +51,23 @@ class ProgramTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return self.program.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ProgramCell", forIndexPath: indexPath) as! UITableViewCell
 
+        cell.textLabel?.text = self.program[indexPath.row].0
         // Configure the cell...
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
