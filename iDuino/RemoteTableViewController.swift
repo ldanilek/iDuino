@@ -8,7 +8,9 @@
 
 import UIKit
 
+typealias RemoteElement =  (String, Type)
 class RemoteTableViewController: UITableViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
