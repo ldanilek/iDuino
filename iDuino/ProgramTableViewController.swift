@@ -208,6 +208,11 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         
         var durationLabel: UILabel? = cell.contentView.viewWithTag(102) as? UILabel
         durationLabel?.text = "Duration: \(self.program[indexPath.row].duration)s"
+        
+        var imageView: UIImageView? = cell.contentView.viewWithTag(103) as? UIImageView
+        imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView?.image = UIImage(named: imageNameForValue(self.program[indexPath.row].request.value))
+        
         // Configure the cell...
         if indexPath.row == self.programCounter && self.state == .Playing {
             cell.backgroundColor = UIColor.yellowColor()

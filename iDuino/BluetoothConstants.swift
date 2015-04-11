@@ -21,3 +21,21 @@ func textForType(component: BluetoothRequest.Component) -> String
         return ""
     }
 }
+
+func imageNameForValue(val: BluetoothRequest.Value) -> String
+{
+    switch val {
+    case .HighSound:
+        return "music"
+    case .LowSound:
+        return "music-note"
+    case .Off:
+        return "lightbulb-off-7"
+    case .On:
+        return "lightbulb-7"
+    case .TurnLeft:
+        return "swipe-left"
+    case .TurnRight:
+        return "swipe-right"
+    }
+}
