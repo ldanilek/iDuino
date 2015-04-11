@@ -13,6 +13,9 @@
 		9B3D52D91AD98C6400DAC8FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B3D52D81AD98C6400DAC8FE /* Images.xcassets */; };
 		9B3D52DC1AD98C6400DAC8FE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B3D52DA1AD98C6400DAC8FE /* LaunchScreen.xib */; };
 		9B3D52E81AD98C6400DAC8FE /* iDuinoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D52E71AD98C6400DAC8FE /* iDuinoTests.swift */; };
+		9B3D52F21AD98E3400DAC8FE /* RemoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D52F11AD98E3400DAC8FE /* RemoteTableViewController.swift */; };
+		9B3D52F41AD98E5100DAC8FE /* ProgramTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D52F31AD98E5100DAC8FE /* ProgramTableViewController.swift */; };
+		9B3D52F61AD98ED800DAC8FE /* AddModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D52F51AD98ED800DAC8FE /* AddModalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		9B3D52E11AD98C6400DAC8FE /* iDuinoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iDuinoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3D52E61AD98C6400DAC8FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B3D52E71AD98C6400DAC8FE /* iDuinoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iDuinoTests.swift; sourceTree = "<group>"; };
+		9B3D52F11AD98E3400DAC8FE /* RemoteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteTableViewController.swift; sourceTree = "<group>"; };
+		9B3D52F31AD98E5100DAC8FE /* ProgramTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTableViewController.swift; sourceTree = "<group>"; };
+		9B3D52F51AD98ED800DAC8FE /* AddModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddModalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,9 @@
 				9B3D52D11AD98C6400DAC8FE /* AppDelegate.swift */,
 				9B3D52D31AD98C6400DAC8FE /* ViewController.swift */,
 				9B3D52D51AD98C6400DAC8FE /* Main.storyboard */,
+				9B3D52F51AD98ED800DAC8FE /* AddModalViewController.swift */,
+				9B3D52F31AD98E5100DAC8FE /* ProgramTableViewController.swift */,
+				9B3D52F11AD98E3400DAC8FE /* RemoteTableViewController.swift */,
 				9B3D52D81AD98C6400DAC8FE /* Images.xcassets */,
 				9B3D52DA1AD98C6400DAC8FE /* LaunchScreen.xib */,
 				9B3D52CF1AD98C6400DAC8FE /* Supporting Files */,
@@ -212,7 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B3D52F41AD98E5100DAC8FE /* ProgramTableViewController.swift in Sources */,
+				9B3D52F21AD98E3400DAC8FE /* RemoteTableViewController.swift in Sources */,
 				9B3D52D41AD98C6400DAC8FE /* ViewController.swift in Sources */,
+				9B3D52F61AD98ED800DAC8FE /* AddModalViewController.swift in Sources */,
 				9B3D52D21AD98C6400DAC8FE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
