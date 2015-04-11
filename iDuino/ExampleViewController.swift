@@ -9,11 +9,13 @@
 import UIKit
 
 class ExampleViewController: UIViewController {
-
+  
   
   var timerTXDelay: NSTimer?
   var allowTX = true
   var currentInstruction: UInt8 = 0
+  
+  var request: BluetoothRequest!
   
   
   
@@ -30,7 +32,11 @@ class ExampleViewController: UIViewController {
   
   @IBAction func onButtonPressed(sender: AnyObject) {
     
-    var request = BluetoothRequest.bluetoothRequestWithType(.Servo)
+    if request == nil {
+      self.request = BluetoothRequest.bluetoothRequestWithType(.LED)
+    }
+    
+    
     
     //said component does not exist
     if request.componentType == .None {
@@ -41,12 +47,21 @@ class ExampleViewController: UIViewController {
     request.value = .On
     
     sendByteString(request.generateByteString())
-    
+    println("\(request.getDescription())");
   }
-
+  
+  
+  @IBAction func onButtonReleased(sender: AnyObject) {
+    puts("Count: \(BluetoothRequest.availableLED!.count)")
+  }
+  
   @IBAction func offButtonPressed(sender: AnyObject) {
     
-    var request = BluetoothRequest.bluetoothRequestWithType(.Servo)
+    if request == nil {
+      self.request = BluetoothRequest.bluetoothRequestWithType(.LED)
+    }
+    
+    
     
     //said component does not exist
     if request.componentType == .None {
@@ -57,7 +72,7 @@ class ExampleViewController: UIViewController {
     request.value = .Off
     
     sendByteString(request.generateByteString())
-    
+    println("\(request.getDescription())");
     
   }
   
@@ -65,7 +80,7 @@ class ExampleViewController: UIViewController {
   @IBAction func someButtonPressed(sender: UISlider) {
     // Call sendByteString with new instruction here!
     
-
+    
     var request = BluetoothRequest.bluetoothRequestWithType(.Servo)
     
     //said component does not exist
