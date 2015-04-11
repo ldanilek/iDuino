@@ -25,7 +25,9 @@
                             <outlet property="delegate" destination="peR-ae-Tvf" id="YqI-2x-WZj"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Root View Controller" id="8K8-ZC-cBj"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="xx4-5J-PP4" kind="presentation" id="cEd-gx-hJG"/>
                     </connections>
@@ -110,7 +112,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="aO3-Wu-XPx"/>
+                    <navigationItem key="navigationItem" id="aO3-Wu-XPx">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="b5V-e2-0Fg">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="sun-om-mbd" id="YRh-ZP-oRG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yOM-6Z-ZIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -8,7 +8,19 @@
 
 import UIKit
 
+protocol AddModalProtocol {
+    func cancelAdd()
+    func addElement(program: ProgramElement?, remote: RemoteElement?)
+}
+
+enum AddType {
+    case ProgramElement
+    case RemoteElement
+}
+
 class AddModalViewController: UIViewController {
+    
+    var type: AddType = .RemoteElement
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +33,11 @@ class AddModalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
 
     /*
     // MARK: - Navigation
