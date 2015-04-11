@@ -17,6 +17,8 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         super.viewDidLoad()
         self.title = "Remote"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem (barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
+        let sample:RemoteElement = ("Hello", Type.LED )
+        remote.append(sample)   
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -62,10 +64,11 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        //let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
 
         // Configure the cell...
-
+        cell.textLabel?.text = self.remote[indexPath.row].0
         return cell
     }
     
