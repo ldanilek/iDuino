@@ -50,6 +50,7 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     
     func cancelAdd() {
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
