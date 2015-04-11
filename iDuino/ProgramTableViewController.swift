@@ -45,7 +45,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         case .Stopped:
             self.state = .Playing
             self.programCounter = 0
-            self.play()
+            self.playNext()
         case .Playing:
             self.state = .Stopped
             self.stop()
@@ -57,6 +57,17 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     func excecuteAction(action: BluetoothRequest) {
         sendByteString(action.generateByteString())
+    }
+    
+    func updateCell(path:Int){
+        if path < 0 || path >= self.program.count {
+            return
+        }
+        let indexPath = NSIndexPath(forRow: path, inSection: 0)
+        
+        tableView.beginUpdates()
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic) //try other animations
+        tableView.endUpdates()
     }
     
     func sendByteString(byteString: UInt8) {
@@ -75,19 +86,29 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         }
     }
     
-    func play(timer: NSTimer? = nil) {
+    func playNext() {
+        updateCell(self.programCounter-1);
+        updateCell(self.programCounter);
         if self.programCounter >= self.program.count {
             self.programCounter = 0
             self.state = .Stopped
+            self.setPlayButtonForState()
             return
         }
         var programElement = self.program[self.programCounter]
+        self.programCounter++
         self.excecuteAction(programElement.request)
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(programElement.duration, target: self, selector:"play:", userInfo:nil, repeats: false)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(programElement.duration, target: self, selector:"playNext", userInfo:nil, repeats: false)
     }
     
     func stop() {
         self.timer?.invalidate()
+        var selected = self.programCounter
+        self.programCounter = -1
+        updateCell(selected-1)
+        updateCell(selected)
+        updateCell(selected+1)
+        self.programCounter = 0
     }
     
     func setPlayButtonForState() {
@@ -155,7 +176,11 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
 
         cell.textLabel?.text = self.program[indexPath.row].name
         // Configure the cell...
-
+        if indexPath.row == self.programCounter && self.state == .Playing {
+            cell.backgroundColor = UIColor.yellowColor()
+        } else {
+            cell.backgroundColor = UIColor.whiteColor()
+        }
         return cell
     }
     
