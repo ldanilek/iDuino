@@ -63,11 +63,10 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-        let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("RemoteCell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
-        cell.textLabel?.text = self.remote[indexPath.row].0
+        (cell.contentView.viewWithTag(100) as! UILabel).text = self.remote[indexPath.row].0 as String
         return cell
     }
     
