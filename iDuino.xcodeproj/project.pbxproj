@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C81AA6C1AD99772002C822C /* BluetoothRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81AA6B1AD99772002C822C /* BluetoothRequest.swift */; };
+		8C81AA6E1AD9A965002C822C /* BTDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81AA6D1AD9A965002C822C /* BTDiscovery.swift */; };
+		8C81AA701AD9A98B002C822C /* BTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81AA6F1AD9A98B002C822C /* BTService.swift */; };
+		8C81AA721AD9B317002C822C /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81AA711AD9B317002C822C /* ExampleViewController.swift */; };
 		9B3D52D21AD98C6400DAC8FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D52D11AD98C6400DAC8FE /* AppDelegate.swift */; };
 		9B3D52D41AD98C6400DAC8FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3D52D31AD98C6400DAC8FE /* ViewController.swift */; };
 		9B3D52D71AD98C6400DAC8FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3D52D51AD98C6400DAC8FE /* Main.storyboard */; };
@@ -30,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C81AA6B1AD99772002C822C /* BluetoothRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothRequest.swift; sourceTree = "<group>"; };
+		8C81AA6D1AD9A965002C822C /* BTDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDiscovery.swift; sourceTree = "<group>"; };
+		8C81AA6F1AD9A98B002C822C /* BTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTService.swift; sourceTree = "<group>"; };
+		8C81AA711AD9B317002C822C /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		9B3D52CC1AD98C6400DAC8FE /* iDuino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDuino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3D52D01AD98C6400DAC8FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B3D52D11AD98C6400DAC8FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +103,10 @@
 				9B3D52D81AD98C6400DAC8FE /* Images.xcassets */,
 				9B3D52DA1AD98C6400DAC8FE /* LaunchScreen.xib */,
 				9B3D52CF1AD98C6400DAC8FE /* Supporting Files */,
+				8C81AA6B1AD99772002C822C /* BluetoothRequest.swift */,
+				8C81AA6D1AD9A965002C822C /* BTDiscovery.swift */,
+				8C81AA6F1AD9A98B002C822C /* BTService.swift */,
+				8C81AA711AD9B317002C822C /* ExampleViewController.swift */,
 			);
 			path = iDuino;
 			sourceTree = "<group>";
@@ -226,10 +238,14 @@
 			files = (
 				9B3D52F41AD98E5100DAC8FE /* ProgramTableViewController.swift in Sources */,
 				9B3D52F21AD98E3400DAC8FE /* RemoteTableViewController.swift in Sources */,
+				8C81AA6E1AD9A965002C822C /* BTDiscovery.swift in Sources */,
+				8C81AA701AD9A98B002C822C /* BTService.swift in Sources */,
 				9B3D52D41AD98C6400DAC8FE /* ViewController.swift in Sources */,
+				8C81AA6C1AD99772002C822C /* BluetoothRequest.swift in Sources */,
 				9B3D52F61AD98ED800DAC8FE /* AddModalViewController.swift in Sources */,
 				9B3D52F81AD990C100DAC8FE /* BluetoothConstants.swift in Sources */,
 				9B3D52D21AD98C6400DAC8FE /* AppDelegate.swift in Sources */,
+				8C81AA721AD9B317002C822C /* ExampleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +441,7 @@
 				9B3D52ED1AD98C6400DAC8FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B3D52EE1AD98C6400DAC8FE /* Build configuration list for PBXNativeTarget "iDuinoTests" */ = {
 			isa = XCConfigurationList;
@@ -433,6 +450,7 @@
 				9B3D52F01AD98C6400DAC8FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
