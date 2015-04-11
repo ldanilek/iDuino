@@ -71,7 +71,7 @@ class ExampleViewController: UIViewController {
     request.value = .Off
     
     sendByteString(request.generateByteString())
-    println("\(request.getDescription())");
+//    println("\(request.getDescription())");
     
   }
   

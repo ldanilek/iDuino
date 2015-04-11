@@ -91,6 +91,8 @@ class BluetoothRequest {
     let componentType = self.componentType
     let pin = self.pin
     
+    puts("Destroying \(self.getDescription())")
+    
     switch componentType as BluetoothRequest.Component {
     case .LED:
       BluetoothRequest.availableLED?.append(pin)
@@ -159,6 +161,7 @@ class BluetoothRequest {
       request.pin = .None
     }
     
+    puts("Created \(request.getDescription())")
     return request
   }
   
