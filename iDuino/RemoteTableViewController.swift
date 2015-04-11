@@ -17,8 +17,6 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         super.viewDidLoad()
         self.title = "Remote"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem (barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
-        let sample:RemoteElement = ("Hello", Type.LED )
-        remote.append(sample)   
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -57,8 +55,9 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
         if let theRemote = remote {
             self.remote.append(theRemote)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.tableView.reloadData()
         }
+            self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 

@@ -71,7 +71,7 @@ class AddModalViewController: UIViewController {
     @IBOutlet var nameTextField: UITextField?
     
     func textFieldShouldReturn (textField: UITextField) -> Bool {
-        self.name = textField.text
+        name = textField.text
         textField.resignFirstResponder()
         
         return true
