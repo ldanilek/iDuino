@@ -35,6 +35,7 @@ class AddModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Add Action"
         durationLabel?.text = NSString(format: "Duration: %gs", self.duration) as String
         if type == .RemoteElement {
             stepper?.hidden = true

@@ -102,12 +102,16 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
             switchLED.hidden = true
             prevButton.hidden = false
             nextButton.hidden = false
+            prevButton.setBackgroundImage(UIImage(named: "swipe-left"), forState: UIControlState.Normal)
+            nextButton.setBackgroundImage(UIImage(named: "swipe-right"), forState: UIControlState.Normal)
             
         case .Sound:
             typeText = "Sound"
             switchLED.hidden = true
             prevButton.hidden = false
             nextButton.hidden = false
+            prevButton.setBackgroundImage(UIImage(named: "music-note"), forState: UIControlState.Normal)
+            nextButton.setBackgroundImage(UIImage(named: "music"), forState: UIControlState.Normal)
         default:
             typeText = "ERROR: NONE"
         
