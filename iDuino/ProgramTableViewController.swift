@@ -8,7 +8,11 @@
 
 import UIKit
 
+typealias ProgramElement = (String, Type, Double)
+
 class ProgramTableViewController: UITableViewController {
+    
+    var program: [ProgramElement] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
