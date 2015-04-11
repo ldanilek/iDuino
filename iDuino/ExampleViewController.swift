@@ -15,6 +15,8 @@ class ExampleViewController: UIViewController {
   var allowTX = true
   var currentInstruction: UInt8 = 0
   
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -31,8 +33,6 @@ class ExampleViewController: UIViewController {
   
   override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
-    
-    self.stopTimerTXDelay()
   }
   
   @IBAction func someButtonPressed(sender: UISlider) {
@@ -40,11 +40,6 @@ class ExampleViewController: UIViewController {
   }
   
   func sendByteString(byteString: UInt8) {
-    // Valid position range: 0 to 180
-    
-    if !self.allowTX {
-      return
-    }
     
     // Is the instruction already running?
     if byteString == currentInstruction {
@@ -52,32 +47,12 @@ class ExampleViewController: UIViewController {
     }
     
     
-    // Send position to BLE Shield (if service exists and is connected)
+    // Send bytes5tring to BLE Shield (if service exists and is connected)
     if let bleService = btDiscoverySharedInstance.bleService {
       bleService.writePosition(byteString)
       currentInstruction = byteString;
       
-      // Start delay timer
-      self.allowTX = false
-      if timerTXDelay == nil {
-        timerTXDelay = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("timerTXDelayElapsed"), userInfo: nil, repeats: false)
-      }
     }
-  }
-  
-  func timerTXDelayElapsed() {
-    self.allowTX = true
-    self.stopTimerTXDelay()
-    self.sendByteString(currentInstruction)
-  }
-  
-  func stopTimerTXDelay() {
-    if self.timerTXDelay == nil {
-      return
-    }
-    
-    timerTXDelay?.invalidate()
-    self.timerTXDelay = nil
   }
   
 }
