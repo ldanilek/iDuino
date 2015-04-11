@@ -87,9 +87,6 @@ class ExampleViewController: UIViewController {
       return
     }
     
-    @IBAction func someButtonPressed(sender: UISlider) {
-        // Call sendByteString with new instruction here!
-    }
     
     // Send bytes5tring to BLE Shield (if service exists and is connected)
     if let bleService = btDiscoverySharedInstance.bleService {
