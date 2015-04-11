@@ -20,15 +20,8 @@ class ExampleViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Watch Bluetooth connection
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("connectionChanged:"), name: BLEServiceChangedStatusNotification, object: nil)
-    
     // Start the Bluetooth discovery process
     btDiscoverySharedInstance
-  }
-  
-  deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self, name: BLEServiceChangedStatusNotification, object: nil)
   }
   
   override func viewWillDisappear(animated: Bool) {
@@ -37,6 +30,20 @@ class ExampleViewController: UIViewController {
   
   @IBAction func someButtonPressed(sender: UISlider) {
     // Call sendByteString with new instruction here!
+    
+
+    var request = BluetoothRequest.bluetoothRequestWithType(.Servo)
+    
+    //said component does not exist
+    if request.componentType == .None {
+      // out of assignable pins, act accordingly
+    }
+    
+    
+    // Give Request Appropriate Value
+    // e.g. request.value = .On
+    
+    sendByteString(request.generateByteString())
   }
   
   func sendByteString(byteString: UInt8) {
