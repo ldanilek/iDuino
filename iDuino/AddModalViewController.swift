@@ -30,8 +30,15 @@ class AddModalViewController: UIViewController {
     
     var duration: Double = 10
 
+    @IBOutlet var stepper: UIStepper?
+    @IBOutlet var durationLabel: UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if type == .RemoteElement {
+            stepper?.hidden = true
+            durationLabel?.hidden = true
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -57,9 +64,21 @@ class AddModalViewController: UIViewController {
         if type == .RemoteElement {
             self.delegate?.addElement(nil, remote: (name, self.actionType))
         } else {
-            self.delegate?.addElement((name, self.actionType, self.duration), remote: nil)
+            self.delegate?.addElement((name, self.actionType, self.duration, 0), remote: nil)
         }
     }
+
+    @IBOutlet var nameTextField: UITextField?
+    
+    func textFieldShouldReturn (textField: UITextField) -> Bool {
+        self.name = textField.text
+        textField.resignFirstResponder()
+        
+        return true
+    }
+
+    
+    
 
     /*
     // MARK: - Navigation
