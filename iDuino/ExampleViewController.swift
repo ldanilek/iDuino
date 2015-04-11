@@ -28,6 +28,40 @@ class ExampleViewController: UIViewController {
     super.viewWillDisappear(animated)
   }
   
+  @IBAction func onButtonPressed(sender: AnyObject) {
+    
+    var request = BluetoothRequest.bluetoothRequestWithType(.Servo)
+    
+    //said component does not exist
+    if request.componentType == .None {
+      // out of assignable pins, act accordingly
+    }
+    
+    
+    request.value = .On
+    
+    sendByteString(request.generateByteString())
+    
+  }
+
+  @IBAction func offButtonPressed(sender: AnyObject) {
+    
+    var request = BluetoothRequest.bluetoothRequestWithType(.Servo)
+    
+    //said component does not exist
+    if request.componentType == .None {
+      // out of assignable pins, act accordingly
+    }
+    
+    
+    request.value = .Off
+    
+    sendByteString(request.generateByteString())
+    
+    
+  }
+  
+  
   @IBAction func someButtonPressed(sender: UISlider) {
     // Call sendByteString with new instruction here!
     
