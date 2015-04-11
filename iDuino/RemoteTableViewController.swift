@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias RemoteElement =  (String, Type)
+typealias RemoteElement =  (String, BluetoothRequest.Component)
 class RemoteTableViewController: UITableViewController, AddModalProtocol {
     
     var remote: [RemoteElement] = []

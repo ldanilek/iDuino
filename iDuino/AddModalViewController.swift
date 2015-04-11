@@ -24,7 +24,7 @@ class AddModalViewController: UIViewController {
     
     var type: AddType = .RemoteElement
     
-    var actionType: Type = .LED
+    var actionType: BluetoothRequest.Component = .LED
     
     
     var duration: Double = 3
@@ -54,12 +54,14 @@ class AddModalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func segmentedControllerChanged(sender: UISegmentedControl) {
-        let type: Type
+        let type: BluetoothRequest.Component
         switch sender.selectedSegmentIndex {
         case 0:
             type = .LED
         case 1:
-            type = .DCMotor
+            type = .Servo
+        case 2:
+            type = .Sound
         default:
             type = .LED
         }
