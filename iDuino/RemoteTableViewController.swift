@@ -62,12 +62,60 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     }
     
 
+    @IBAction func switchLEDChanged(sender: UISwitch) {
+        var cell: UITableViewCell = sender.superview?.superview as! UITableViewCell
+        var indexPath = self.tableView.indexPathForCell(cell)
+        var shouldBeOn:Bool = sender.on
+        //do change the LED
+    }
+    @IBAction func prevButtonPressed(sender: UIButton) {
+        println("prev")
+    }
+    
+    @IBAction func nextButtonPressed(sender: UIButton) {
+        println("next")
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RemoteCell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
+        
+        // Name of the action
         (cell.contentView.viewWithTag(100) as! UILabel).text = self.remote[indexPath.row].0 as String
+        
+        // Type of the action
+        var typeText: String
+        var switchLED = cell.contentView.viewWithTag(102) as! UISwitch
+        var prevButton = cell.contentView.viewWithTag(103) as! UIButton
+        var nextButton =  cell.contentView.viewWithTag(104) as! UIButton
+        
+        switch self.remote[indexPath.row].1 {
+        case .LED:
+            typeText = "LED"
+            switchLED.hidden = false
+            prevButton.hidden = true
+            nextButton.hidden = true
+            
+        case .Servo:
+            typeText = "Servo"
+            switchLED.hidden = true
+            prevButton.hidden = false
+            nextButton.hidden = false
+            
+        case .Sound:
+            typeText = "Sound"
+            switchLED.hidden = true
+            prevButton.hidden = false
+            nextButton.hidden = false
+        default:
+            typeText = "ERROR: NONE"
+        
+        }
+        (cell.contentView.viewWithTag(101) as! UILabel).text = typeText
+        
+        
+        
         return cell
     }
     

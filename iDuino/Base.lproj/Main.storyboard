@@ -25,15 +25,41 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TypeLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dze-m7-T3T">
-                                            <rect key="frame" x="8" y="43" width="88" height="21"/>
+                                            <rect key="frame" x="8" y="41" width="88" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch hidden="YES" opaque="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="msb-sU-xe0">
+                                        <switch opaque="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="msb-sU-xe0">
                                             <rect key="frame" x="525" y="18" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="switchLEDChanged:" destination="peR-ae-Tvf" eventType="valueChanged" id="qG7-dU-i66"/>
+                                            </connections>
                                         </switch>
+                                        <button opaque="NO" tag="103" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRm-Yh-ptR">
+                                            <rect key="frame" x="465" y="19" width="46" height="30"/>
+                                            <state key="normal" title="prev">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="prevButtonPressed:" destination="peR-ae-Tvf" eventType="touchUpInside" id="27s-Zz-8bg"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="104" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNi-Qg-AKq">
+                                            <rect key="frame" x="528" y="19" width="46" height="30"/>
+                                            <state key="normal" title="next">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="nextButtonPressed:" destination="peR-ae-Tvf" eventType="touchUpInside" id="Hdo-tU-DhU"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="SNi-Qg-AKq" firstAttribute="leading" secondItem="cRm-Yh-ptR" secondAttribute="trailing" constant="17" id="1xU-M5-rS3"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="SNi-Qg-AKq" secondAttribute="trailing" constant="18" id="bgK-Ue-1WT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="msb-sU-xe0" secondAttribute="trailing" constant="18" id="yg1-Co-3Ox"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -161,7 +187,7 @@
                                 <rect key="frame" x="16" y="129" width="568" height="29"/>
                                 <segments>
                                     <segment title="LED"/>
-                                    <segment title="DC Motor"/>
+                                    <segment title="Servo"/>
                                     <segment title="Sound"/>
                                 </segments>
                                 <connections>
