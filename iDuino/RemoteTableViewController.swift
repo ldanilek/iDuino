@@ -9,20 +9,23 @@
 import UIKit
 
 typealias RemoteElement =  (String, BluetoothRequest.Component)
+typealias internalRemoteElt = (name: String, request: BluetoothRequest)
+
 class RemoteTableViewController: UITableViewController, AddModalProtocol {
     
     var remote: [RemoteElement] = []
+    
+    var currentInstruction: UInt8 = 0
+    
+    var request: BluetoothRequest!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Remote"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem (barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // Start the Bluetooth discovery process
+        btDiscoverySharedInstance
     }
     
     func addButtonPressed() {
@@ -55,6 +58,7 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
         if let theRemote = remote {
+            
             self.remote.append(theRemote)
             self.tableView.reloadData()
         }
@@ -74,7 +78,32 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     
     @IBAction func nextButtonPressed(sender: UIButton) {
         println("next")
+        var req = BluetoothRequest.bluetoothRequestWithType(.Servo)
+        
+        if req.componentType == .None {
+            //out of assignable pins
+        }
+        
+        //Give Request Appropriate Value
+        //e.g. request.value = .On
+        
+        sendByteString(request.generateByteString())
     }
+    
+    func sendByteString(byteString: UInt8) {
+        // Is the instructino already running?
+        if byteString == currentInstruction {
+           return
+        }
+        
+        // Send bytes5tring to BLE Shield (if service exists and is connected)
+        if let bleService = btDiscoverySharedInstance.bleService {
+            bleService.writePosition(byteString)
+            currentInstruction = byteString;
+            
+        }
+    }
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("RemoteCell", forIndexPath: indexPath) as! UITableViewCell
@@ -168,6 +197,7 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         // Pass the selected object to the new view controller.
         let nextNavigationController:AddModalViewController? = ((segue.destinationViewController as? UINavigationController)?.viewControllers.last as? AddModalViewController)
         nextNavigationController?.delegate = self
+        nextNavigationController?.type = AddType.RemoteElement
     }
 
 
