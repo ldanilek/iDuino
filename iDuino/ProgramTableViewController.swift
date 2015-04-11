@@ -8,7 +8,8 @@
 
 import UIKit
 
-typealias ProgramElement = (name: String, type: Type, duration: Double, action: Double)
+typealias ProgramElement = (name: String, type: BluetoothRequest.Component, duration: Double, action: Double)
+typealias InternalProgramElement = (name: String, duration: Double, request: BluetoothRequest)
 
 enum ProgramState {
     case Playing
@@ -17,8 +18,10 @@ enum ProgramState {
 
 class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
-    var program: [ProgramElement] = []
+    var program: [InternalProgramElement] = []
     var state: ProgramState = .Stopped
+    
+    var currentInstruction: UInt8 = 0
     
     var programCounter: Int = 0
     
@@ -52,8 +55,24 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         self.setPlayButtonForState()
     }
     
-    func excecuteAction(actionType: Type, action: Double) {
+    func excecuteAction(action: BluetoothRequest) {
+        sendByteString(action.generateByteString())
+    }
+    
+    func sendByteString(byteString: UInt8) {
         
+        // Is the instruction already running?
+        if byteString == currentInstruction {
+            return
+        }
+        
+        
+        // Send bytes5tring to BLE Shield (if service exists and is connected)
+        if let bleService = btDiscoverySharedInstance.bleService {
+            bleService.writePosition(byteString)
+            currentInstruction = byteString;
+            
+        }
     }
     
     func play(timer: NSTimer? = nil) {
@@ -63,12 +82,12 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
             return
         }
         var programElement = self.program[self.programCounter]
-        self.excecuteAction(programElement.type, action: programElement.action)
-        self.timer = NSTimer(timeInterval: programElement.duration, target: self, selector: "play", userInfo: nil, repeats: false)
+        self.excecuteAction(programElement.request)
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(programElement.duration, target: self, selector:"play:", userInfo:nil, repeats: false)
     }
     
     func stop() {
-        
+        self.timer?.invalidate()
     }
     
     func setPlayButtonForState() {
@@ -76,14 +95,14 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         var word: String
         switch state {
         case .Stopped:
-            image = nil
+            image = UIImage(named: "button-play-7")
             word = "Play"
         case .Playing:
-            image = nil
-            word = "Pause"
+            image = UIImage(named: "button-stop-7")
+            word = "Stop"
         default:
+            image = UIImage(named: "button-play-7")
             word = "Play"
-            image = nil
         }
         let button: UIBarButtonItem
         if let img = image {
@@ -100,7 +119,9 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
         if let theProgram = program {
-            self.program.append(theProgram)
+            var request = BluetoothRequest.bluetoothRequestWithType(theProgram.type)
+            var newProgram: InternalProgramElement = (theProgram.name, theProgram.duration, request)
+            self.program.append(newProgram)
             self.tableView.reloadData()
         }
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -137,6 +158,10 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
 
         return cell
     }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 55;
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -156,6 +181,10 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
+    }
+    
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
     
 
