@@ -8,7 +8,16 @@
 
 import Foundation
 
-enum Type {
-    case LED
-    case DCMotor
+func textForType(component: BluetoothRequest.Component) -> String
+{
+    switch component {
+    case .LED:
+        return "LED"
+    case .Servo:
+        return "Servo"
+    case .Sound:
+        return "Sound"
+    default:
+        return ""
+    }
 }

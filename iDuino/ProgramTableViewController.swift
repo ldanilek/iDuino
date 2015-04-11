@@ -16,6 +16,14 @@ enum ProgramState {
     case Stopped
 }
 
+func pad(string : String, toSize: Int) -> String {
+    var padded = string
+    for i in 0..<toSize - count(string) {
+        padded = "0" + padded
+    }
+    return padded
+}
+
 class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     var program: [InternalProgramElement] = []
@@ -37,6 +45,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        btDiscoverySharedInstance
     }
     
     func play(button: UIBarButtonItem)
@@ -71,6 +80,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     }
     
     func sendByteString(byteString: UInt8) {
+        println("Sending byte string: \(pad(String(byteString, radix: 2), 8))")
         
         // Is the instruction already running?
         if byteString == currentInstruction {
@@ -141,6 +151,21 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
         if let theProgram = program {
             var request = BluetoothRequest.bluetoothRequestWithType(theProgram.type)
+            var rawElement: Int = Int(theProgram.action+0.1)
+            if rawElement == 0 {
+                request.value = .Off
+            } else if rawElement == 1 {
+                request.value = .On
+            } else if rawElement == 2 {
+                request.value = .TurnRight
+            } else if rawElement == 3 {
+                request.value = .TurnLeft
+            } else if rawElement == 4 {
+                request.value = .LowSound
+            } else {
+                request.value = .HighSound
+            }
+            
             var newProgram: InternalProgramElement = (theProgram.name, theProgram.duration, request)
             self.program.append(newProgram)
             self.tableView.reloadData()
@@ -173,8 +198,16 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ProgramCell", forIndexPath: indexPath) as! UITableViewCell
-
-        cell.textLabel?.text = self.program[indexPath.row].name
+        
+        var nameLabel: UILabel? = cell.contentView.viewWithTag(100) as? UILabel
+        nameLabel?.text = self.program[indexPath.row].name
+        // cell.textLabel?.text = self.program[indexPath.row].name
+        
+        var typeLabel: UILabel? = cell.contentView.viewWithTag(101) as? UILabel
+        typeLabel?.text = textForType(self.program[indexPath.row].request.componentType)
+        
+        var durationLabel: UILabel? = cell.contentView.viewWithTag(102) as? UILabel
+        durationLabel?.text = "Duration: \(self.program[indexPath.row].duration)s"
         // Configure the cell...
         if indexPath.row == self.programCounter && self.state == .Playing {
             cell.backgroundColor = UIColor.yellowColor()
@@ -182,10 +215,6 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
             cell.backgroundColor = UIColor.whiteColor()
         }
         return cell
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 55;
     }
 
     /*
