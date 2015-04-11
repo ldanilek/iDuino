@@ -66,13 +66,25 @@ class AddModalViewController: UIViewController {
         self.actionType = type
     }
     
+    @IBAction func cancelButtonPressed(sender: UIBarButtonItem) {
+        self.delegate?.cancelAdd()
+    }
+    
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
-        if type == .RemoteElement {
-            self.delegate?.addElement(nil, remote: (nameTextField!.text, self.actionType))
+        if nameTextField?.text == "" {
+            var noNameAlert = UIAlertController(title: "No Name", message: "Please add the name of the action", preferredStyle: UIAlertControllerStyle.Alert)
+            noNameAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(noNameAlert, animated: true, completion: nil)
         } else {
-            self.delegate?.addElement((nameTextField!.text, self.actionType, self.duration, 0), remote: nil)
+            if type == .RemoteElement {
+                self.delegate?.addElement(nil, remote: (nameTextField!.text, self.actionType))
+            } else {
+                self.delegate?.addElement((nameTextField!.text, self.actionType, self.duration, 0), remote: nil)
+            }
         }
     }
+    
+    
 
     
     func textFieldShouldReturn (textField: UITextField) -> Bool {

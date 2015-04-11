@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RemoteCell" rowHeight="76" id="7hi-Sg-Yhk">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RemoteCell" rowHeight="76" id="7hi-Sg-Yhk">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7hi-Sg-Yhk" id="elR-oO-5VZ">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -71,7 +71,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProgramCell" id="PKN-eY-75x">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProgramCell" id="PKN-eY-75x">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PKN-eY-75x" id="uOa-X6-VrH">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -181,7 +181,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aO3-Wu-XPx">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jey-rI-i1e"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jey-rI-i1e">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="sun-om-mbd" id="e6G-3b-DOR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="b5V-e2-0Fg">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="sun-om-mbd" id="YRh-ZP-oRG"/>
@@ -290,6 +294,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cEd-gx-hJG"/>
+        <segue reference="7x6-bW-viT"/>
     </inferredMetricsTieBreakers>
 </document>
