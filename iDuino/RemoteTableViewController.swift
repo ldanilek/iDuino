@@ -9,17 +9,24 @@
 import UIKit
 
 typealias RemoteElement =  (String, Type)
-class RemoteTableViewController: UITableViewController {
+class RemoteTableViewController: UITableViewController, AddModalProtocol {
     
+    var remote: [RemoteElement] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Remote"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem (barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func addButtonPressed() {
+        self.performSegueWithIdentifier("Add", sender: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,24 +39,38 @@ class RemoteTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return remote.count
     }
+    
+    func cancelAdd() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func addElement(program: ProgramElement?, remote: RemoteElement?) {
+        if let theRemote = remote {
+            self.remote.append(theRemote)
+            self.tableView.reloadData()
+        }
+            self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        //let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
 
         // Configure the cell...
-
+        cell.textLabel?.text = self.remote[indexPath.row].0
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,14 +107,16 @@ class RemoteTableViewController: UITableViewController {
     }
     */
 
-    /*
+   
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        let nextNavigationController:AddModalViewController? = ((segue.destinationViewController as? UINavigationController)?.viewControllers.last as? AddModalViewController)
+        nextNavigationController?.delegate = self
     }
-    */
+
 
 }

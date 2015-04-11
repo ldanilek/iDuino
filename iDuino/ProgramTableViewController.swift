@@ -8,21 +8,90 @@
 
 import UIKit
 
-typealias ProgramElement = (String, Type, Double)
+typealias ProgramElement = (name: String, type: Type, duration: Double, action: Double)
+
+enum ProgramState {
+    case Playing
+    case Stopped
+}
 
 class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     var program: [ProgramElement] = []
+    var state: ProgramState = .Stopped
+    
+    var programCounter: Int = 0
+    
+    var timer: NSTimer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
+        self.setPlayButtonForState()
         self.title = "Program"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func play(button: UIBarButtonItem)
+    {
+        switch state {
+        case .Stopped:
+            self.state = .Playing
+            self.programCounter = 0
+            self.play()
+        case .Playing:
+            self.state = .Stopped
+            self.stop()
+        default:
+            self.state = .Playing
+        }
+        self.setPlayButtonForState()
+    }
+    
+    func excecuteAction(actionType: Type, action: Double) {
+        
+    }
+    
+    func play(timer: NSTimer? = nil) {
+        if self.programCounter >= self.program.count {
+            self.programCounter = 0
+            self.state = .Stopped
+            return
+        }
+        var programElement = self.program[self.programCounter]
+        self.excecuteAction(programElement.type, action: programElement.action)
+        self.timer = NSTimer(timeInterval: programElement.duration, target: self, selector: "play", userInfo: nil, repeats: false)
+    }
+    
+    func stop() {
+        
+    }
+    
+    func setPlayButtonForState() {
+        var image: UIImage?
+        var word: String
+        switch state {
+        case .Stopped:
+            image = nil
+            word = "Play"
+        case .Playing:
+            image = nil
+            word = "Pause"
+        default:
+            word = "Play"
+            image = nil
+        }
+        let button: UIBarButtonItem
+        if let img = image {
+            button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: "play:")
+        } else {
+            button = UIBarButtonItem(title: word, style: UIBarButtonItemStyle.Plain, target: self, action: "play:")
+        }
+        self.navigationItem.leftBarButtonItem = button
     }
     
     func cancelAdd() {
@@ -63,7 +132,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ProgramCell", forIndexPath: indexPath) as! UITableViewCell
 
-        cell.textLabel?.text = self.program[indexPath.row].0
+        cell.textLabel?.text = self.program[indexPath.row].name
         // Configure the cell...
 
         return cell
@@ -77,17 +146,18 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            program.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -104,14 +174,17 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        var addModal: AddModalViewController? = (segue.destinationViewController as? UINavigationController)?.viewControllers.last as? AddModalViewController
+        addModal?.delegate = self
+        addModal?.type = AddType.ProgramElement
     }
-    */
+    
 
 }
