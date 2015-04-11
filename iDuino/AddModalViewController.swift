@@ -20,7 +20,15 @@ enum AddType {
 
 class AddModalViewController: UIViewController {
     
+    var delegate: AddModalProtocol?
+    
     var type: AddType = .RemoteElement
+    
+    var actionType: Type = .LED
+    
+    var name: String = ""
+    
+    var duration: Double = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +40,25 @@ class AddModalViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func segmentedControllerChanged(sender: UISegmentedControl) {
+        let type: Type
+        switch sender.selectedSegmentIndex {
+        case 0:
+            type = .LED
+        case 1:
+            type = .DCMotor
+        default:
+            type = .LED
+        }
+        self.actionType = type
+    }
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
+        if type == .RemoteElement {
+            self.delegate?.addElement(nil, remote: (name, self.actionType))
+        } else {
+            self.delegate?.addElement((name, self.actionType, self.duration), remote: nil)
+        }
     }
 
     /*

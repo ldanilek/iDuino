@@ -10,19 +10,53 @@ import UIKit
 
 typealias ProgramElement = (String, Type, Double)
 
+enum ProgramState {
+    case Playing
+    case Paused
+    case Stopped
+}
+
 class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     var program: [ProgramElement] = []
+    var state: ProgramState = .Stopped
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
+        self.setPlayButtonForState()
         self.title = "Program"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func play(button: UIBarButtonItem)
+    {
+        switch state {
+        case .Paused:
+            self.state = .Playing
+        case .Playing:
+            self.state = .Paused
+        default:
+            self.state = .Playing
+        }
+        self.setPlayButtonForState()
+    }
+    
+    func setPlayButtonForState() {
+        var image: UIImage?
+        switch state {
+        case .Paused:
+            image = nil
+        case .Playing:
+            image = nil
+        default:
+            image = nil
+        }
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: "play:")
     }
     
     func cancelAdd() {
