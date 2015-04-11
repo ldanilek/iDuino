@@ -199,19 +199,20 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ProgramCell", forIndexPath: indexPath) as! UITableViewCell
         
+        var request: BluetoothRequest = self.program[indexPath.row].request
         var nameLabel: UILabel? = cell.contentView.viewWithTag(100) as? UILabel
         nameLabel?.text = self.program[indexPath.row].name
         // cell.textLabel?.text = self.program[indexPath.row].name
         
         var typeLabel: UILabel? = cell.contentView.viewWithTag(101) as? UILabel
-        typeLabel?.text = textForType(self.program[indexPath.row].request.componentType)
+        typeLabel?.text = textForType(request.componentType)
         
         var durationLabel: UILabel? = cell.contentView.viewWithTag(102) as? UILabel
         durationLabel?.text = "Duration: \(self.program[indexPath.row].duration)s"
         
         var imageView: UIImageView? = cell.contentView.viewWithTag(103) as? UIImageView
         imageView?.contentMode = UIViewContentMode.ScaleAspectFit
-        imageView?.image = UIImage(named: imageNameForValue(self.program[indexPath.row].request.value))
+        imageView?.image = UIImage(named: imageNameForValue(request.value, request.componentType))
         
         // Configure the cell...
         if indexPath.row == self.programCounter && self.state == .Playing {

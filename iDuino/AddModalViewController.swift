@@ -32,6 +32,7 @@ class AddModalViewController: UIViewController {
     @IBOutlet var stepper: UIStepper?
     @IBOutlet var durationLabel: UILabel?
     @IBOutlet var nameTextField: UITextField?
+    @IBOutlet var valueSegmentedControl: UISegmentedControl?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,18 @@ class AddModalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func segmentedControllerChanged(sender: UISegmentedControl) {
+        if sender == self.valueSegmentedControl! {
+            let value: BluetoothRequest.Value
+            switch sender.selectedSegmentIndex {
+            case 0:
+                value = .On
+            case 1:
+                value = .Off
+            default:
+                value = .Off
+            }
+            return
+        }
         let type: BluetoothRequest.Component
         switch sender.selectedSegmentIndex {
         case 0:

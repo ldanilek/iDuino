@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="l6c-d3-xp3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="l6c-d3-xp3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -220,6 +220,16 @@
                                     <action selector="segmentedControllerChanged:" destination="sun-om-mbd" eventType="valueChanged" id="s0b-Gg-ypk"/>
                                 </connections>
                             </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QNc-Xb-Zji">
+                                <rect key="frame" x="239" y="174" width="345" height="29"/>
+                                <segments>
+                                    <segment title="On"/>
+                                    <segment title="Off"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControllerChanged:" destination="sun-om-mbd" eventType="valueChanged" id="tgK-9Q-GjE"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -228,9 +238,12 @@
                             <constraint firstItem="VFr-OT-zgu" firstAttribute="leading" secondItem="jmf-Mv-2b1" secondAttribute="trailing" constant="8" id="3hZ-dG-1de"/>
                             <constraint firstItem="jmf-Mv-2b1" firstAttribute="top" secondItem="yBQ-Lf-kki" secondAttribute="bottom" constant="8" id="AJK-cb-nFR"/>
                             <constraint firstItem="B0k-rB-Afs" firstAttribute="leading" secondItem="eGu-aM-cF0" secondAttribute="trailing" constant="8" id="HxA-yt-xBW"/>
+                            <constraint firstItem="QNc-Xb-Zji" firstAttribute="leading" secondItem="B0k-rB-Afs" secondAttribute="trailing" constant="18" id="IaT-zf-bXY"/>
+                            <constraint firstItem="QNc-Xb-Zji" firstAttribute="top" secondItem="vS9-bW-WHI" secondAttribute="bottom" constant="17" id="MA7-5M-BVH"/>
                             <constraint firstItem="B0k-rB-Afs" firstAttribute="top" secondItem="vS9-bW-WHI" secondAttribute="bottom" constant="16" id="OXs-Gm-uM8"/>
                             <constraint firstItem="vS9-bW-WHI" firstAttribute="top" secondItem="VFr-OT-zgu" secondAttribute="bottom" constant="17" id="ST8-tH-E1O"/>
                             <constraint firstItem="B0k-rB-Afs" firstAttribute="top" secondItem="vS9-bW-WHI" secondAttribute="bottom" constant="16" id="WTy-hP-y47"/>
+                            <constraint firstItem="QNc-Xb-Zji" firstAttribute="trailing" secondItem="DyA-Kk-LfH" secondAttribute="trailingMargin" id="X5y-1A-i1Q"/>
                             <constraint firstItem="eGu-aM-cF0" firstAttribute="top" secondItem="vS9-bW-WHI" secondAttribute="bottom" constant="20" id="aZP-LY-XqV"/>
                             <constraint firstItem="eGu-aM-cF0" firstAttribute="leading" secondItem="DyA-Kk-LfH" secondAttribute="leadingMargin" id="atD-ok-uTf"/>
                             <constraint firstItem="VFr-OT-zgu" firstAttribute="top" secondItem="yBQ-Lf-kki" secondAttribute="bottom" constant="18" id="e1u-hl-Sha"/>
@@ -257,6 +270,7 @@
                         <outlet property="durationLabel" destination="eGu-aM-cF0" id="33r-Dc-GjF"/>
                         <outlet property="nameTextField" destination="VFr-OT-zgu" id="JVy-zb-Ndo"/>
                         <outlet property="stepper" destination="B0k-rB-Afs" id="sPE-5f-0Co"/>
+                        <outlet property="valueSegmentedControl" destination="QNc-Xb-Zji" id="T5t-67-Ms1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yOM-6Z-ZIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
