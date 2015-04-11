@@ -26,23 +26,29 @@ class AddModalViewController: UIViewController {
     
     var actionType: Type = .LED
     
-    var name: String = ""
     
-    var duration: Double = 10
+    var duration: Double = 3
 
     @IBOutlet var stepper: UIStepper?
     @IBOutlet var durationLabel: UILabel?
+    @IBOutlet var nameTextField: UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        durationLabel?.text = NSString(format: "Duration: %gs", self.duration) as String
         if type == .RemoteElement {
             stepper?.hidden = true
             durationLabel?.hidden = true
         }
+        
 
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func stepperChanged(sender: UIStepper) {
+        self.duration = self.stepper!.value as Double
+        durationLabel?.text = NSString(format: "Duration: %gs", self.duration) as String
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -62,16 +68,14 @@ class AddModalViewController: UIViewController {
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
         if type == .RemoteElement {
-            self.delegate?.addElement(nil, remote: (name, self.actionType))
+            self.delegate?.addElement(nil, remote: (nameTextField!.text, self.actionType))
         } else {
-            self.delegate?.addElement((name, self.actionType, self.duration, 0), remote: nil)
+            self.delegate?.addElement((nameTextField!.text, self.actionType, self.duration, 0), remote: nil)
         }
     }
 
-    @IBOutlet var nameTextField: UITextField?
     
     func textFieldShouldReturn (textField: UITextField) -> Bool {
-        name = textField.text
         textField.resignFirstResponder()
         
         return true
