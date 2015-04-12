@@ -40,6 +40,7 @@ class AddModalViewController: UIViewController {
         stepper?.hidden = type == .RemoteElement
         durationLabel?.hidden = type == .RemoteElement
         valueSegmentedControl?.hidden = type == .RemoteElement
+        nameTextField?.becomeFirstResponder()
         
 
         // Do any additional setup after loading the view.
@@ -88,10 +89,12 @@ class AddModalViewController: UIViewController {
     }
     
     @IBAction func cancelButtonPressed(sender: UIBarButtonItem) {
+        self.nameTextField?.resignFirstResponder()
         self.delegate?.cancelAdd()
     }
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
+        nameTextField?.resignFirstResponder()
         if nameTextField?.text == "" {
             var noNameAlert = UIAlertController(title: "No Name", message: "Please add the name of the action", preferredStyle: UIAlertControllerStyle.Alert)
             noNameAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
