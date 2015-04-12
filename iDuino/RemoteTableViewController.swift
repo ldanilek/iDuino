@@ -59,10 +59,16 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
         if let theRemote = remote {
             var request = BluetoothRequest.bluetoothRequestWithType(theRemote.1)
+            if request.componentType == .None {
+                var noPin = UIAlertController(title: "All Available Pins Used", message: "Please free up a pin for \(textForType(theRemote.1))", preferredStyle: UIAlertControllerStyle.Alert)
+                noPin.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(noPin, animated: true, completion: nil)
+            }else {
+                var newRemote: InternalRemoteElt = (theRemote.0, request)
+                self.remote.append(newRemote)
+                self.tableView.reloadData()
+            }
             
-            var newRemote: InternalRemoteElt = (theRemote.0, request)
-            self.remote.append(newRemote)
-            self.tableView.reloadData()
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
