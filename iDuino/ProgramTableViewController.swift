@@ -257,14 +257,14 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     alertController.popoverPresentationController?.sourceView = self.view
     alertController.popoverPresentationController?.sourceRect = CGRectMake(self.view.bounds.width / 2.0, self.view.bounds.height / 2.0, 1.0, 1.0)
     
-    var usedPins: [BluetoothRequest.Pin] = []
+    var pins: [BluetoothRequest.Pin] = []
     switch request.componentType {
     case .LED:
-      usedPins = BluetoothRequest.usedLED!
+      pins = BluetoothRequest.allLED
     case .Servo:
-      usedPins = BluetoothRequest.usedServo!
+      pins = BluetoothRequest.allServo
     case .Sound:
-      usedPins = BluetoothRequest.usedSound!
+      pins = BluetoothRequest.allSound
     case .None:
       break;
     }
@@ -272,7 +272,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
     alertController.addAction(cancelAction)
     
-    for pin in usedPins {
+    for pin in pins {
       var pinAction = UIAlertAction(title: BluetoothRequest.stringForPin(pin), style: .Default, handler: { _ in request.pin = pin })
       alertController.addAction(pinAction)
     }
