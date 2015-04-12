@@ -97,10 +97,17 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         updateCell(self.programCounter-1);
         updateCell(self.programCounter);
         if self.programCounter >= self.program.count {
-            self.programCounter = 0
-            self.state = .Stopped
-            self.setPlayButtonForState()
-            return
+            if self.doesRepeat {
+                self.programCounter = 0
+                self.state = .Playing
+                playNext()
+                return
+            }else {
+                self.programCounter = 0
+                self.state = .Stopped
+                self.setPlayButtonForState()
+                return
+            }
         }
         var programElement = self.program[self.programCounter]
         self.programCounter++
@@ -187,7 +194,10 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        self.showReassignablePins(indexPath)
+        if indexPath.row < self.program.count {
+            self.showReassignablePins(indexPath)
+            
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
