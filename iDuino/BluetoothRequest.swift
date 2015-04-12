@@ -51,6 +51,9 @@ class BluetoothRequest {
   static var availableLED: [Pin]?
   static var availableServo: [Pin]?
   static var availableSound: [Pin]?
+  static var usedLED: [Pin]?
+  static var usedServo: [Pin]?
+  static var usedSound: [Pin]?
   
   func getDescription() -> String {
     let byteString = String(self.generateByteString(), radix: 2)
@@ -89,6 +92,40 @@ class BluetoothRequest {
     return "Type: \(self.componentType.rawValue), Value: \(self.value.rawValue), at Pin: \(pinValue), \(byteString)"
   }
   
+  class func stringForPin(pin: Pin) -> String {
+    var pinValue: String
+    switch pin as BluetoothRequest.Pin {
+    case .D0:
+      pinValue = "D0"
+    case .D1:
+      pinValue = "D1"
+    case .D2:
+      pinValue = "D2"
+    case .D3:
+      pinValue = "D3"
+    case .D6:
+      pinValue = "D6"
+    case .D7:
+      pinValue = "D7"
+    case .D8:
+      pinValue = "D8"
+    case .D9:
+      pinValue = "D9"
+    case .D10:
+      pinValue = "D10"
+    case .D11:
+      pinValue = "D11"
+    case .D12:
+      pinValue = "D12"
+    case .None:
+      pinValue = "Unassigned"
+    default:
+      fatalError("Should be here yo")
+    }
+    
+    return pinValue
+  }
+  
   deinit {
     let componentType = self.componentType
     let pin = self.pin
@@ -98,10 +135,13 @@ class BluetoothRequest {
     switch componentType as BluetoothRequest.Component {
     case .LED:
       BluetoothRequest.availableLED?.append(pin)
+      BluetoothRequest.usedLED?.filter { $0.rawValue != pin.rawValue }
     case .Servo:
       BluetoothRequest.availableServo?.append(pin)
+      BluetoothRequest.usedServo?.filter { $0.rawValue != pin.rawValue }
     case .Sound:
       BluetoothRequest.availableSound?.append(pin)
+      BluetoothRequest.usedSound?.filter { $0.rawValue != pin.rawValue }
     case .None:
       break;
     default:
@@ -144,10 +184,13 @@ class BluetoothRequest {
       switch (componentType) {
       case .LED:
         availableLED = selectFrom.filter { $0.rawValue != request.pin.rawValue }
+        usedLED?.append(request.pin)
       case .Servo:
         availableServo = selectFrom.filter { $0.rawValue != request.pin.rawValue }
+        usedServo?.append(request.pin)
       case .Sound:
         availableSound = selectFrom.filter { $0.rawValue != request.pin.rawValue }
+        usedSound?.append(request.pin)
       default:
         fatalError("Invalid component for bluetooth request")
       }
@@ -167,6 +210,9 @@ class BluetoothRequest {
     availableLED = [.D0, .D1, .D2, .D3, .D6, .D7, .D8, .D9]
     availableServo = [.D10, .D11]
     availableSound = [.D12]
+    usedLED = []
+    usedServo = []
+    usedSound = []
   }
   
   func generateByteString() -> UInt8 {
