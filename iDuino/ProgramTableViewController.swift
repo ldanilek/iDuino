@@ -184,8 +184,8 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
   }
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    var request = self.program[indexPath.row].request
-    self.showReassignablePins(request)
+    
+    self.showReassignablePins(indexPath)
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -246,12 +246,13 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
   
   
   
-  func showReassignablePins(request: BluetoothRequest) {
+  func showReassignablePins(index: NSIndexPath) {
     let alertController = UIAlertController(title: nil, message: nil,
       preferredStyle: .ActionSheet)
     alertController.popoverPresentationController?.sourceView = self.view
     alertController.popoverPresentationController?.sourceRect = CGRectMake(self.view.bounds.width / 2.0, self.view.bounds.height / 2.0, 1.0, 1.0)
     
+    var request = self.program[index.row].request
     var pins: [BluetoothRequest.Pin] = []
     switch request.componentType {
     case .LED:
@@ -270,7 +271,10 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     for pin in pins {
       var pinAction = UIAlertAction(title: BluetoothRequest.stringForPin(pin), style: .Default, handler: { _ in
         
-      
+        self.program[index.row].request.pin = pin
+        self.tableView.reloadData()
+        
+        
       })
       alertController.addAction(pinAction)
     }

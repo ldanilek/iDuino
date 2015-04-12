@@ -40,7 +40,7 @@ class BluetoothRequest {
     case LowSound
     case HighSound
   }
-  
+
   
   var componentType: Component = .None
   var value: Value = .Off
