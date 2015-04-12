@@ -133,6 +133,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     let button: UIBarButtonItem
     if let img = image {
       button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: "play:")
+      
     } else {
       button = UIBarButtonItem(title: word, style: UIBarButtonItemStyle.Plain, target: self, action: "play:")
     }
