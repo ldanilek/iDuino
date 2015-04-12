@@ -273,7 +273,10 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     alertController.addAction(cancelAction)
     
     for pin in pins {
-      var pinAction = UIAlertAction(title: BluetoothRequest.stringForPin(pin), style: .Default, handler: { _ in request.pin = pin })
+      var pinAction = UIAlertAction(title: BluetoothRequest.stringForPin(pin), style: .Default, handler: { _ in
+        
+      
+      })
       alertController.addAction(pinAction)
     }
     
