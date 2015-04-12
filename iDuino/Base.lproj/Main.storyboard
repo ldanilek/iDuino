@@ -54,6 +54,12 @@
                                                 <action selector="nextButtonPressed:" destination="peR-ae-Tvf" eventType="touchUpInside" id="Hdo-tU-DhU"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwF-1I-6fg">
+                                            <rect key="frame" x="96" y="40" width="132" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="SNi-Qg-AKq" firstAttribute="leading" secondItem="cRm-Yh-ptR" secondAttribute="trailing" constant="17" id="1xU-M5-rS3"/>
@@ -79,11 +85,11 @@
             </objects>
             <point key="canvasLocation" x="1916" y="-1155"/>
         </scene>
-        <!--Item-->
+        <!--Remote-->
         <scene sceneID="ftj-ph-nWd">
             <objects>
-                <navigationController id="XS2-Lk-Hc1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="8hk-X3-UKB"/>
+                <navigationController title="Remote" id="XS2-Lk-Hc1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Remote" id="8hk-X3-UKB"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dW4-lb-mdt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -304,11 +310,11 @@
             </objects>
             <point key="canvasLocation" x="3564" y="-717"/>
         </scene>
-        <!--Item-->
+        <!--Program-->
         <scene sceneID="Wh5-wa-m2g">
             <objects>
-                <navigationController id="7Ba-oi-EG8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="7w4-Wz-DqV"/>
+                <navigationController title="Program" id="7Ba-oi-EG8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Program" id="7w4-Wz-DqV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FQv-Lb-3qL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -340,62 +346,8 @@
             </objects>
             <point key="canvasLocation" x="390" y="-747"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="FeA-Fq-Zz7">
-            <objects>
-                <viewController id="dLS-fb-q0n" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="afX-93-BMt"/>
-                        <viewControllerLayoutGuide type="bottom" id="raU-gB-hCg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sl0-x3-Vsk">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="zyT-FA-hon"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1cz-YA-dSA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
-        <!--Item 1-->
-        <scene sceneID="rSn-Sn-EXv">
-            <objects>
-                <viewController id="3E1-cE-MdA" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Wul-F0-NQy"/>
-                        <viewControllerLayoutGuide type="bottom" id="t6A-Ns-OVd"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Mgv-CK-9Qw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="HYf-DA-y62"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C8C-mf-k27" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="nmN-Zj-Bqo">
-            <objects>
-                <tabBarController id="8Rc-Cf-qMe" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="Tl0-td-WBg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="3E1-cE-MdA" kind="relationship" relationship="viewControllers" id="zhY-ML-9mc"/>
-                        <segue destination="dLS-fb-q0n" kind="relationship" relationship="viewControllers" id="Ze3-E8-cIJ"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wqr-nz-PAj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7x6-bW-viT"/>
+        <segue reference="cEd-gx-hJG"/>
     </inferredMetricsTieBreakers>
 </document>

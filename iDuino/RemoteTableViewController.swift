@@ -161,6 +161,9 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         var prevButton = cell.contentView.viewWithTag(103) as! UIButton
         var nextButton =  cell.contentView.viewWithTag(104) as! UIButton
         
+        var pinLabel = cell.contentView.viewWithTag(110) as! UILabel
+        pinLabel.text = "Pin: \(BluetoothRequest.stringForPin(self.remote[indexPath.row].request.pin))"
+        
         switch self.remote[indexPath.row].request.componentType {
         case .LED:
             switchLED.hidden = false
