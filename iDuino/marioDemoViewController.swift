@@ -79,7 +79,7 @@ class marioDemoViewController: UITableViewController {
         var stopMusReq = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.Sound)
         stopMusReq.value = .Off
         stopMusReq.pin = .D12
-        var stopMusObj:InternalProgramElement = ("Stop Music", 5, stopMusReq)
+        var stopMusObj:InternalProgramElement = ("Stop Music", 0.1, stopMusReq)
         program.append(stopMusObj)
         
         self.tableView.rowHeight = 100
