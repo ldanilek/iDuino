@@ -29,7 +29,7 @@ class BluetoothRequest {
     case D10 = 0b00001000
     case D11 = 0b00001001
     case D12 = 0b00001010
-    case None = 0b11111111
+    case None = 0b00001111
   }
   
   enum Value: UInt8 {
@@ -42,9 +42,9 @@ class BluetoothRequest {
   }
   
   
-  var componentType: Component!
-  var value: Value!
-  var pin: Pin!
+  var componentType: Component = .None
+  var value: Value = .Off
+  var pin: Pin = .None
   
   
   // Variables shared between instances to show pin avaiability
@@ -56,7 +56,7 @@ class BluetoothRequest {
     let byteString = String(self.generateByteString(), radix: 2)
     
     var pinValue: String
-    switch self.pin as BluetoothRequest.Pin{
+    switch self.pin as BluetoothRequest.Pin {
     case .D0:
       pinValue = "D0"
     case .D1:
@@ -79,6 +79,8 @@ class BluetoothRequest {
       pinValue = "D11"
     case .D12:
       pinValue = "D12"
+    case .None:
+      pinValue = "Unassigned"
     default:
       fatalError("Should be here yo")
       
@@ -100,6 +102,8 @@ class BluetoothRequest {
       BluetoothRequest.availableServo?.append(pin)
     case .Sound:
       BluetoothRequest.availableSound?.append(pin)
+    case .None:
+      break;
     default:
       fatalError("Deallocating strange pin")
     }
@@ -116,45 +120,39 @@ class BluetoothRequest {
     var request = BluetoothRequest()
     request.componentType = componentType
     request.value = .Off
+    request.pin = .None
     
     
     var selectFrom: [Pin]
     //Assigns available pin, if possible
     switch (componentType) {
     case .LED:
-      puts("Creating LED Request")
       selectFrom = availableLED!
     case .Servo:
-      puts("Creating Servo Request")
       selectFrom = availableServo!
     case .Sound:
-      puts("Creating Sound Request")
       selectFrom = availableSound!
     default:
       fatalError("Invalid component for bluetooth request")
     }
     
-    println("Pre-assign: \(availableLED!.count)")
     
     if selectFrom.count > 0 {
-      request.pin = selectFrom.first
+      request.pin = selectFrom.first!
       
       //messy but what the hell
       switch (componentType) {
       case .LED:
-        puts("Creating LED Request")
         availableLED = selectFrom.filter { $0.rawValue != request.pin.rawValue }
       case .Servo:
-        puts("Creating Servo Request")
         availableServo = selectFrom.filter { $0.rawValue != request.pin.rawValue }
       case .Sound:
-        puts("Creating Sound Request")
         availableSound = selectFrom.filter { $0.rawValue != request.pin.rawValue }
       default:
         fatalError("Invalid component for bluetooth request")
       }
       
-      println("Post-assign: \(availableLED!.count)")
+    
       
     } else {
       request.componentType = .None
@@ -184,7 +182,7 @@ class BluetoothRequest {
     
     // Assign Value
     var value: UInt8!
-    switch (self.value!)  {
+    switch (self.value)  {
     case .Off:
       value = 0b00000000
     case .On:

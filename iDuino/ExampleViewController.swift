@@ -33,10 +33,13 @@ class ExampleViewController: UIViewController {
   @IBAction func onButtonPressed(sender: AnyObject) {
     
     if request == nil {
-      self.request = BluetoothRequest.bluetoothRequestWithType(.Servo)
+      self.request = BluetoothRequest.bluetoothRequestWithType(.LED)
     }
     
+    var s0 = BluetoothRequest.bluetoothRequestWithType(.Sound)
+    var s1 = BluetoothRequest.bluetoothRequestWithType(.Sound)
     
+    puts("\(s1.getDescription())")
     
     //said component does not exist
     if request.componentType == .None {
@@ -58,7 +61,7 @@ class ExampleViewController: UIViewController {
   @IBAction func offButtonPressed(sender: AnyObject) {
     
     if request == nil {
-      self.request = BluetoothRequest.bluetoothRequestWithType(.Servo)
+      self.request = BluetoothRequest.bluetoothRequestWithType(.LED)
     }
     
     
