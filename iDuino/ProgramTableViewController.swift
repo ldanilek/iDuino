@@ -40,11 +40,6 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
     self.setPlayButtonForState()
     self.title = "Program"
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     btDiscoverySharedInstance
   }
   
@@ -206,7 +201,8 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     typeLabel?.text = textForType(request.componentType)
     
     var durationLabel: UILabel? = cell.contentView.viewWithTag(102) as? UILabel
-    durationLabel?.text = "\(self.program[indexPath.row].duration)s"
+    var text = NSString(format: "%.1gs", self.program[indexPath.row].duration)
+    durationLabel?.text = text as String
     
     var pinLabel: UILabel? = cell.contentView.viewWithTag(104) as? UILabel
     pinLabel?.text = "Pin: \(BluetoothRequest.stringForPin(request.pin))"

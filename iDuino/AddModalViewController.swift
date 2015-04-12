@@ -26,7 +26,7 @@ class AddModalViewController: UIViewController {
     var actionType: BluetoothRequest.Component = .LED
     
     
-    var duration: Double = 3
+    var duration: Double = 1
 
     @IBOutlet var stepper: UIStepper?
     @IBOutlet var durationLabel: UILabel?
