@@ -226,9 +226,6 @@
                                     <segment title="On"/>
                                     <segment title="Off"/>
                                 </segments>
-                                <connections>
-                                    <action selector="segmentedControllerChanged:" destination="sun-om-mbd" eventType="valueChanged" id="tgK-9Q-GjE"/>
-                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

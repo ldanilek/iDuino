@@ -23,7 +23,6 @@ class AddModalViewController: UIViewController {
     var delegate: AddModalProtocol?
     
     var type: AddType = .RemoteElement
-    
     var actionType: BluetoothRequest.Component = .LED
     
     
@@ -38,10 +37,9 @@ class AddModalViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Add Action"
         durationLabel?.text = NSString(format: "Duration: %gs", self.duration) as String
-        if type == .RemoteElement {
-            stepper?.hidden = true
-            durationLabel?.hidden = true
-        }
+        stepper?.hidden = type == .RemoteElement
+        durationLabel?.hidden = type == .RemoteElement
+        valueSegmentedControl?.hidden = type == .RemoteElement
         
 
         // Do any additional setup after loading the view.
@@ -56,18 +54,6 @@ class AddModalViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func segmentedControllerChanged(sender: UISegmentedControl) {
-        if sender == self.valueSegmentedControl! {
-            let value: BluetoothRequest.Value
-            switch sender.selectedSegmentIndex {
-            case 0:
-                value = .On
-            case 1:
-                value = .Off
-            default:
-                value = .Off
-            }
-            return
-        }
         let type: BluetoothRequest.Component
         switch sender.selectedSegmentIndex {
         case 0:
@@ -80,6 +66,25 @@ class AddModalViewController: UIViewController {
             type = .LED
         }
         self.actionType = type
+        self.setSegments()
+    }
+    
+    func setSegments() {
+        var segments = ["Off", "On"]
+        if self.actionType == .Sound {
+            segments = ["High", "Low", "Off"]
+        } else if self.actionType == .Servo {
+            segments = ["Left", "Right"]
+        }
+        while self.valueSegmentedControl!.numberOfSegments > segments.count {
+            self.valueSegmentedControl?.removeSegmentAtIndex(self.valueSegmentedControl!.numberOfSegments-1, animated: true)
+        }
+        for i in 0..<self.valueSegmentedControl!.numberOfSegments {
+            self.valueSegmentedControl?.setTitle(segments[i], forSegmentAtIndex: i)
+        }
+        while self.valueSegmentedControl!.numberOfSegments < segments.count {
+            self.valueSegmentedControl?.insertSegmentWithTitle(segments[self.valueSegmentedControl!.numberOfSegments], atIndex: self.valueSegmentedControl!.numberOfSegments, animated: true)
+        }
     }
     
     @IBAction func cancelButtonPressed(sender: UIBarButtonItem) {
@@ -95,7 +100,25 @@ class AddModalViewController: UIViewController {
             if type == .RemoteElement {
                 self.delegate?.addElement(nil, remote: (nameTextField!.text, self.actionType))
             } else {
-                self.delegate?.addElement((nameTextField!.text, self.actionType, self.duration, 0), remote: nil)
+                var title = self.valueSegmentedControl!.titleForSegmentAtIndex(self.valueSegmentedControl!.selectedSegmentIndex)!
+                let value: BluetoothRequest.Value
+                switch title {
+                case "On":
+                    value = .On
+                case "Off":
+                    value = .Off
+                case "Left":
+                    value = .TurnLeft
+                case "Right":
+                    value = .TurnRight
+                case "High":
+                    value = .HighSound
+                case "Low":
+                    value = .LowSound
+                default:
+                    value = .On
+                }
+                self.delegate?.addElement((nameTextField!.text, self.actionType, self.duration, value), remote: nil)
             }
         }
     }

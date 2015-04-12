@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias ProgramElement = (name: String, type: BluetoothRequest.Component, duration: Double, action: Double)
+typealias ProgramElement = (name: String, type: BluetoothRequest.Component, duration: Double, action: BluetoothRequest.Value)
 typealias InternalProgramElement = (name: String, duration: Double, request: BluetoothRequest)
 
 enum ProgramState {
@@ -151,20 +151,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
         if let theProgram = program {
             var request = BluetoothRequest.bluetoothRequestWithType(theProgram.type)
-            var rawElement: Int = Int(theProgram.action+0.1)
-            if rawElement == 0 {
-                request.value = .Off
-            } else if rawElement == 1 {
-                request.value = .On
-            } else if rawElement == 2 {
-                request.value = .TurnRight
-            } else if rawElement == 3 {
-                request.value = .TurnLeft
-            } else if rawElement == 4 {
-                request.value = .LowSound
-            } else {
-                request.value = .HighSound
-            }
+            request.value = theProgram.action
             
             var newProgram: InternalProgramElement = (theProgram.name, theProgram.duration, request)
             self.program.append(newProgram)
