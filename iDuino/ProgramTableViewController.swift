@@ -215,7 +215,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
             let cell = tableView.dequeueReusableCellWithIdentifier("RepeatCell", forIndexPath: indexPath) as! UITableViewCell
             var repeatLabel: UILabel? = cell.contentView.viewWithTag(200) as? UILabel
             if self.doesRepeat {
-                cell.backgroundColor = UIColor.orangeColor()
+                cell.backgroundColor = UIColor(red: 1.0, green: 0.94, blue: 0.56, alpha: 0.75)
             } else {
                 cell.backgroundColor = UIColor.whiteColor()
             }
