@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "swipe-right.png"
+      "filename" : "Group.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "swipe-right-1.png"
+      "filename" : "Group@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "swipe-right-2.png"
+      "filename" : "Group@3x.png"
     }
   ],
   "info" : {

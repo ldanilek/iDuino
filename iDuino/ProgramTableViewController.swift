@@ -42,6 +42,8 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
         self.setPlayButtonForState()
         self.title = "Program"
+      
+        self.tableView.rowHeight = 100
         btDiscoverySharedInstance
     }
     
@@ -241,12 +243,23 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
             pinLabel?.text = "Pin: \(BluetoothRequest.stringForPin(request.pin))"
             
             var imageView: UIImageView? = cell.contentView.viewWithTag(103) as? UIImageView
-            imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+            imageView?.contentMode = UIViewContentMode.Center
             imageView?.image = UIImage(named: imageNameForValue(request.value, request.componentType))
+          
+          switch request.componentType {
+          case .LED:
+            imageView?.backgroundColor = UIColor(red: 0.08, green: 0.73, blue: 0.55, alpha: 1)
+          case .Servo:
+            imageView?.backgroundColor = UIColor(red: 1, green: 0.28, blue:  0.28, alpha: 1)
+          case .Sound:
+            imageView?.backgroundColor = UIColor(red: 0.31, green: 0.05, blue: 0.73, alpha: 1)
+          case .None:
+            imageView?.backgroundColor = UIColor.clearColor()
+          }
             
             // Configure the cell...
             if indexPath.row == self.programCounter && self.state == .Playing {
-                cell.backgroundColor = UIColor.yellowColor()
+                cell.backgroundColor = UIColor(red: 0.47, green: 0.92, blue: 0.6, alpha: 0.8)
             } else {
                 cell.backgroundColor = UIColor.whiteColor()
             }

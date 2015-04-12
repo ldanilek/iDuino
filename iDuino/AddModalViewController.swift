@@ -42,7 +42,6 @@ class AddModalViewController: UIViewController {
         valueSegmentedControl?.hidden = type == .RemoteElement
         nameTextField?.becomeFirstResponder()
         
-
         // Do any additional setup after loading the view.
     }
 
