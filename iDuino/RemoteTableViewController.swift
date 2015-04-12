@@ -276,6 +276,9 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     */
 
    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -108,6 +108,10 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(programElement.duration, target: self, selector:"playNext", userInfo:nil, repeats: false)
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
     func stop() {
         self.timer?.invalidate()
         var selected = self.programCounter
@@ -116,6 +120,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         updateCell(selected)
         updateCell(selected+1)
         self.programCounter = 0
+        
     }
     
     func setPlayButtonForState() {
@@ -199,6 +204,11 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         if indexPath.row == self.program.count {
             let cell = tableView.dequeueReusableCellWithIdentifier("RepeatCell", forIndexPath: indexPath) as! UITableViewCell
             var repeatLabel: UILabel? = cell.contentView.viewWithTag(200) as? UILabel
+            if self.doesRepeat {
+                cell.backgroundColor = UIColor.orangeColor()
+            } else {
+                cell.backgroundColor = UIColor.whiteColor()
+            }
             
             return cell
             
@@ -256,6 +266,12 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     
     @IBAction func repeatButtonPressed(sender: UIButton) {
+        if self.doesRepeat {
+            self.doesRepeat = false
+        } else {
+            self.doesRepeat = true
+        }
+        self.tableView.reloadData()
     }
     
     func showReassignablePins(index: NSIndexPath) {
