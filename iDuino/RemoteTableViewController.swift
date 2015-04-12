@@ -23,7 +23,7 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         super.viewDidLoad()
         self.title = "Remote"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem (barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
-
+        
         // Start the Bluetooth discovery process
         btDiscoverySharedInstance
     }
