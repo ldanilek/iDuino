@@ -2,17 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "wireless-signal.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "window-code-3.png"
+      "filename" : "wireless-signal-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "window-code-3-1.png"
+      "filename" : "wireless-signal-2.png"
     }
   ],
   "info" : {
