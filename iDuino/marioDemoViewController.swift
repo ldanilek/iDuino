@@ -28,6 +28,8 @@ class marioDemoViewController: UITableViewController {
         self.setPlayButtonForState()
         self.title = "Mario!"
         
+        
+        
         var reqMario = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.Sound)
         reqMario.value = .LowSound
         reqMario.pin = BluetoothRequest.Pin.D12
@@ -39,7 +41,7 @@ class marioDemoViewController: UITableViewController {
             var req1 = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.LED)
             req1.value = .On
             req1.pin = pinArray[index]
-            var obj1:InternalProgramElement = ("\(index) On",0.05,req1)
+            var obj1:InternalProgramElement = ("\(index) On",0.04,req1)
             program.append(obj1)
             
             var req2 = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.LED)
@@ -48,15 +50,42 @@ class marioDemoViewController: UITableViewController {
             var obj2:InternalProgramElement = ("\(index) Off", 0.03, req2)
             program.append(obj2)
             
-            
+            if (index % 3) == 1 {
+                var req3 = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.Servo)
+                if (index % 2) == 1 {
+                    req3.value = .TurnRight
+                }else {
+                    req3.value = .TurnLeft
+                }
+                req3.pin = .D11
+                var obj3:InternalProgramElement = ("\(index) Servo", 0.01, req3)
+                program.append(obj3)
+                
+            }
         }
-       
         
+        var reqFin1 = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.Servo)
+        reqFin1.value = .TurnRight
+        reqFin1.pin = .D11
+        var objFin1:InternalProgramElement = ("Servo", 1, reqFin1)
+        program.append(objFin1)
         
-      
+        var reqFin2 = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.Servo)
+        reqFin2.value = .Off
+        reqFin2.pin = .D11
+        var objFin2:InternalProgramElement = ("Servo", 5, reqFin2)
+        program.append(objFin2)
+        
+        var stopMusReq = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.Sound)
+        stopMusReq.value = .Off
+        stopMusReq.pin = .D12
+        var stopMusObj:InternalProgramElement = ("Stop Music", 5, stopMusReq)
+        program.append(stopMusObj)
+        
         self.tableView.rowHeight = 100
         btDiscoverySharedInstance
     }
+    
     
     func play(button: UIBarButtonItem)
     {

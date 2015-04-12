@@ -224,9 +224,9 @@ class BluetoothRequest {
     case .On:
       value = 0b00000001
     case .TurnRight:
-      value = 0b00000001
-    case .TurnLeft:
       value = 0b00000010
+    case .TurnLeft:
+      value = 0b00000001
     case .LowSound:
       value = 0b00000001
     case .HighSound:

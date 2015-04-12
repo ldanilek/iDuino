@@ -322,7 +322,7 @@
         <scene sceneID="JmN-5v-A0C">
             <objects>
                 <navigationController id="efY-FB-Dyq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Mario!" id="5W9-yE-Rz9"/>
+                    <tabBarItem key="tabBarItem" title="Mario!" image="movie-play-2" id="5W9-yE-Rz9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MOk-jy-dZJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -610,8 +610,8 @@
                                             </userDefinedRuntimeAttributes>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="tGi-H3-KJA"/>
                                                     <exclude reference="E1f-R0-61u"/>
+                                                    <exclude reference="tGi-H3-KJA"/>
                                                 </mask>
                                             </variation>
                                         </imageView>
@@ -687,6 +687,7 @@
     </scenes>
     <resources>
         <image name="arrow-repeat-two-7" width="30" height="30"/>
+        <image name="movie-play-2" width="30" height="30"/>
         <image name="setting-gears-2" width="30" height="30"/>
         <image name="wireless-signal" width="30" height="30"/>
     </resources>
