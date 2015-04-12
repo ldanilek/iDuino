@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A42DB081ADA7A390089281C /* marioDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A42DB071ADA7A390089281C /* marioDemoViewController.swift */; };
 		8C81AA6C1AD99772002C822C /* BluetoothRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81AA6B1AD99772002C822C /* BluetoothRequest.swift */; };
 		8C81AA6E1AD9A965002C822C /* BTDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81AA6D1AD9A965002C822C /* BTDiscovery.swift */; };
 		8C81AA701AD9A98B002C822C /* BTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81AA6F1AD9A98B002C822C /* BTService.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A42DB071ADA7A390089281C /* marioDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = marioDemoViewController.swift; sourceTree = "<group>"; };
 		8C81AA6B1AD99772002C822C /* BluetoothRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothRequest.swift; sourceTree = "<group>"; };
 		8C81AA6D1AD9A965002C822C /* BTDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTDiscovery.swift; sourceTree = "<group>"; };
 		8C81AA6F1AD9A98B002C822C /* BTService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTService.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				9B3D52F51AD98ED800DAC8FE /* AddModalViewController.swift */,
 				9B3D52F31AD98E5100DAC8FE /* ProgramTableViewController.swift */,
 				9B3D52F71AD990C100DAC8FE /* BluetoothConstants.swift */,
+				5A42DB071ADA7A390089281C /* marioDemoViewController.swift */,
 				9B3D52F11AD98E3400DAC8FE /* RemoteTableViewController.swift */,
 				9B3D52D81AD98C6400DAC8FE /* Images.xcassets */,
 				9B3D52DA1AD98C6400DAC8FE /* LaunchScreen.xib */,
@@ -238,6 +241,7 @@
 			files = (
 				9B3D52F41AD98E5100DAC8FE /* ProgramTableViewController.swift in Sources */,
 				9B3D52F21AD98E3400DAC8FE /* RemoteTableViewController.swift in Sources */,
+				5A42DB081ADA7A390089281C /* marioDemoViewController.swift in Sources */,
 				8C81AA6E1AD9A965002C822C /* BTDiscovery.swift in Sources */,
 				8C81AA701AD9A98B002C822C /* BTService.swift in Sources */,
 				9B3D52D41AD98C6400DAC8FE /* ViewController.swift in Sources */,
