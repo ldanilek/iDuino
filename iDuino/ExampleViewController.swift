@@ -33,7 +33,7 @@ class ExampleViewController: UIViewController {
   @IBAction func onButtonPressed(sender: AnyObject) {
     
     if request == nil {
-      self.request = BluetoothRequest.bluetoothRequestWithType(.LED)
+      self.request = BluetoothRequest.bluetoothRequestWithType(.Servo)
     }
     
     
@@ -47,6 +47,7 @@ class ExampleViewController: UIViewController {
     request.value = .On
     
     sendByteString(request.generateByteString())
+    puts("Sending: \(request.getDescription())")
   }
   
   
@@ -57,7 +58,7 @@ class ExampleViewController: UIViewController {
   @IBAction func offButtonPressed(sender: AnyObject) {
     
     if request == nil {
-      self.request = BluetoothRequest.bluetoothRequestWithType(.LED)
+      self.request = BluetoothRequest.bluetoothRequestWithType(.Servo)
     }
     
     
@@ -71,7 +72,9 @@ class ExampleViewController: UIViewController {
     request.value = .Off
     
     sendByteString(request.generateByteString())
-//    println("\(request.getDescription())");
+    puts("Sending: \(request.getDescription())")
+    
+    self.request = nil
     
   }
   

@@ -11,25 +11,25 @@ import UIKit
 class BluetoothRequest {
   
   enum Component: UInt8 {
-    case LED
-    case Servo
-    case Sound
-    case None
+    case LED = 0b00000000
+    case Servo = 0b00000001
+    case Sound = 0b00000010
+    case None = 0b00000011
   }
   
   enum Pin: UInt8 {
-    case D0 = 0
-    case D1
-    case D2
-    case D3
-    case D6
-    case D7
-    case D8
-    case D9
-    case D10
-    case D11
-    case D12
-    case None
+    case D0 = 0b00000000
+    case D1 = 0b00000001
+    case D2 = 0b00000010
+    case D3 = 0b00000011
+    case D6 = 0b00000100
+    case D7 = 0b00000101
+    case D8 = 0b00000110
+    case D9 = 0b00000111
+    case D10 = 0b00001000
+    case D11 = 0b00001001
+    case D12 = 0b00001010
+    case None = 0b11111111
   }
   
   enum Value: UInt8 {
@@ -175,10 +175,12 @@ class BluetoothRequest {
     var byte: UInt8 = 0b00000000
     
     // Assign Pin
-    byte = (byte | self.pin.rawValue) << 4
+    byte = (byte | self.pin.rawValue)
     
     // Assign Component
-    byte = (byte | self.pin.rawValue) << 2
+//    puts("After assign pin \(String(byte, radix: 2))")
+    byte = ((byte << 2) | self.componentType.rawValue)
+//    puts("After assign \(String(byte, radix: 2))")
     
     // Assign Value
     var value: UInt8!
@@ -199,7 +201,7 @@ class BluetoothRequest {
       fatalError("Invalid value")
     }
     
-    byte = byte | value
+    byte = ((byte << 2) | value)
     
     return byte
   }
