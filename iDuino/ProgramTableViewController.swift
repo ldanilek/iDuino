@@ -149,15 +149,21 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     }
     
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
         if let theProgram = program {
             var request = BluetoothRequest.bluetoothRequestWithType(theProgram.type)
-            request.value = theProgram.action
-            
-            var newProgram: InternalProgramElement = (theProgram.name, theProgram.duration, request)
-            self.program.append(newProgram)
-            self.tableView.reloadData()
+            if request.componentType == .None {
+                var noPin = UIAlertController(title: "All Available Pins Used", message: "Please free up a pin for \(textForType(theProgram.type))", preferredStyle: UIAlertControllerStyle.Alert)
+                noPin.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(noPin, animated: true, completion: nil)
+            } else {
+                request.value = theProgram.action
+                
+                var newProgram: InternalProgramElement = (theProgram.name, theProgram.duration, request)
+                self.program.append(newProgram)
+                self.tableView.reloadData()
+            }
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func addButtonPressed() {
