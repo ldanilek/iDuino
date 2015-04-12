@@ -9,11 +9,11 @@
 import UIKit
 
 typealias RemoteElement =  (String, BluetoothRequest.Component)
-typealias internalRemoteElt = (name: String, request: BluetoothRequest)
+typealias InternalRemoteElt = (name: String, request: BluetoothRequest)
 
 class RemoteTableViewController: UITableViewController, AddModalProtocol {
     
-    var remote: [RemoteElement] = []
+    var remote: [InternalRemoteElt] = []
     
     var currentInstruction: UInt8 = 0
     
@@ -48,7 +48,7 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return remote.count
+        return self.remote.count
     }
     
     func cancelAdd() {
@@ -58,39 +58,76 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
         if let theRemote = remote {
+            var request = BluetoothRequest.bluetoothRequestWithType(theRemote.1)
             
-            self.remote.append(theRemote)
+            var newRemote: InternalRemoteElt = (theRemote.0, request)
+            self.remote.append(newRemote)
             self.tableView.reloadData()
         }
-            self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 
     @IBAction func switchLEDChanged(sender: UISwitch) {
         var cell: UITableViewCell = sender.superview?.superview as! UITableViewCell
-        var indexPath = self.tableView.indexPathForCell(cell)
+        var indexPath = self.tableView.indexPathForCell(cell)!.row
         var shouldBeOn:Bool = sender.on
+        var remoteElt = self.remote[indexPath]
         //do change the LED
+        if shouldBeOn {
+            remoteElt.request.value = .On
+        } else {
+            remoteElt.request.value = .Off
+        }
+        
+        //said component does not exist
+        if remoteElt.request.componentType == .None {
+            // out of assignable pins, act accordingly
+            var nopinAlert = UIAlertController(title: "No More Pin Available", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            nopinAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        }
+        sendByteString(remoteElt.request.generateByteString())
     }
     @IBAction func prevButtonPressed(sender: UIButton) {
-        println("prev")
+        var cell: UITableViewCell = sender.superview?.superview as! UITableViewCell
+        var indexPath = self.tableView.indexPathForCell(cell)!.row
+        var remoteElt = self.remote[indexPath]
+        if remoteElt.request.componentType == .Servo {
+            remoteElt.request.value = .TurnLeft
+        } else {
+            remoteElt.request.value = .LowSound
+        }
+        //said component does not exist
+        if remoteElt.request.componentType == .None {
+            // out of assignable pins, act accordingly
+            var nopinAlert = UIAlertController(title: "No More Pin Available", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            nopinAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        }
+        
+        sendByteString(remoteElt.request.generateByteString())
     }
     
     @IBAction func nextButtonPressed(sender: UIButton) {
-        println("next")
-        var req = BluetoothRequest.bluetoothRequestWithType(.Servo)
-        
-        if req.componentType == .None {
-            //out of assignable pins
+        var cell: UITableViewCell = sender.superview?.superview as! UITableViewCell
+        var indexPath = self.tableView.indexPathForCell(cell)!.row
+        var remoteElt = self.remote[indexPath]
+        if remoteElt.request.componentType == .Servo {
+            remoteElt.request.value = .TurnRight
+        } else {
+            remoteElt.request.value = .HighSound
+        }
+        //said component does not exist
+        if remoteElt.request.componentType == .None {
+            // out of assignable pins, act accordingly
+            var nopinAlert = UIAlertController(title: "No More Pin Available", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            nopinAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         }
         
-        //Give Request Appropriate Value
-        //e.g. request.value = .On
-        
-        sendByteString(request.generateByteString())
+        sendByteString(remoteElt.request.generateByteString())
     }
     
     func sendByteString(byteString: UInt8) {
+        println("Sending byte string: \(pad(String(byteString, radix: 2), 8))")
         // Is the instructino already running?
         if byteString == currentInstruction {
            return
@@ -114,20 +151,17 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         (cell.contentView.viewWithTag(100) as! UILabel).text = self.remote[indexPath.row].0 as String
         
         // Type of the action
-        var typeText: String
         var switchLED = cell.contentView.viewWithTag(102) as! UISwitch
         var prevButton = cell.contentView.viewWithTag(103) as! UIButton
         var nextButton =  cell.contentView.viewWithTag(104) as! UIButton
         
-        switch self.remote[indexPath.row].1 {
+        switch self.remote[indexPath.row].request.componentType {
         case .LED:
-            typeText = "LED"
             switchLED.hidden = false
             prevButton.hidden = true
             nextButton.hidden = true
             
         case .Servo:
-            typeText = "Servo"
             switchLED.hidden = true
             prevButton.hidden = false
             nextButton.hidden = false
@@ -135,17 +169,17 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
             nextButton.setBackgroundImage(UIImage(named: "swipe-right"), forState: UIControlState.Normal)
             
         case .Sound:
-            typeText = "Sound"
             switchLED.hidden = true
             prevButton.hidden = false
             nextButton.hidden = false
             prevButton.setBackgroundImage(UIImage(named: "music-note"), forState: UIControlState.Normal)
             nextButton.setBackgroundImage(UIImage(named: "music"), forState: UIControlState.Normal)
         default:
-            typeText = "ERROR: NONE"
-        
+            switchLED.hidden = true
+            prevButton.hidden = true
+            nextButton.hidden = true
         }
-        (cell.contentView.viewWithTag(101) as! UILabel).text = typeText
+        (cell.contentView.viewWithTag(101) as! UILabel).text = textForType(self.remote[indexPath.row].request.componentType)
         
         
         
@@ -161,17 +195,14 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            self.remote.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>EF1F2417-AFE9-416B-85F0-5FA6354F638F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>iDuino</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>6A1C9A69F5126F5046DD961F4E6992EED39A3783</key>
 		<string>https://github.com/ldanilek/iDuino.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iDuino.xcodeproj</string>
+	<string>iDuino.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6A1C9A69F5126F5046DD961F4E6992EED39A3783</key>
