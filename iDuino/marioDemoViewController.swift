@@ -65,7 +65,7 @@ class marioDemoViewController: UITableViewController {
         }
         
         var reqFin1 = BluetoothRequest.bluetoothRequestWithType(BluetoothRequest.Component.Servo)
-        reqFin1.value = .TurnRight
+        reqFin1.value = .TurnLeft
         reqFin1.pin = .D11
         var objFin1:InternalProgramElement = ("Servo", 1, reqFin1)
         program.append(objFin1)
