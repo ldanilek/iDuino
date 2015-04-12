@@ -35,6 +35,8 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     
     var timer: NSTimer?
     
+    var doesRepeat: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")

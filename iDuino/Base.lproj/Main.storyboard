@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RemoteCell" rowHeight="68" id="7hi-Sg-Yhk">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RemoteCell" rowHeight="68" id="7hi-Sg-Yhk">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7hi-Sg-Yhk" id="elR-oO-5VZ">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -415,6 +415,6 @@
         <image name="window-code-3" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7x6-bW-viT"/>
+        <segue reference="cEd-gx-hJG"/>
     </inferredMetricsTieBreakers>
 </document>
