@@ -192,7 +192,6 @@ class BluetoothRequest {
     
       
     } else {
-      request.componentType = .None
       request.pin = .None
     }
     
