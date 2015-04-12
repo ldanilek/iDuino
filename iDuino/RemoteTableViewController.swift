@@ -95,6 +95,7 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         sendByteString(remoteElt.request.generateByteString())
     }
     @IBAction func prevButtonPressed(sender: UIButton) {
+        //starting to be pressed
         var cell: UITableViewCell = sender.superview?.superview as! UITableViewCell
         var indexPath = self.tableView.indexPathForCell(cell)!.row
         var remoteElt = self.remote[indexPath]
@@ -114,6 +115,7 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     }
     
     @IBAction func nextButtonPressed(sender: UIButton) {
+        //starting to be pressed
         var cell: UITableViewCell = sender.superview?.superview as! UITableViewCell
         var indexPath = self.tableView.indexPathForCell(cell)!.row
         var remoteElt = self.remote[indexPath]
@@ -132,10 +134,27 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         sendByteString(remoteElt.request.generateByteString())
     }
     
+    
+    @IBAction func buttonReleased(sender: UIButton) {
+        var cell: UITableViewCell = sender.superview?.superview as! UITableViewCell
+        var indexPath = self.tableView.indexPathForCell(cell)!.row
+        var remoteElt = self.remote[indexPath]
+        remoteElt.request.value = .Off
+        //said component does not exist
+        if remoteElt.request.componentType == .None {
+            // out of assignable pins, act accordingly
+            var nopinAlert = UIAlertController(title: "No More Pin Available", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            nopinAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        }
+        
+        sendByteString(remoteElt.request.generateByteString())
+    }
+    
     func sendByteString(byteString: UInt8) {
         println("Sending byte string: \(pad(String(byteString, radix: 2), 8))")
         // Is the instructino already running?
         if byteString == currentInstruction {
+            println("no sig sent")
            return
         }
         
