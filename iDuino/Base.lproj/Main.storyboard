@@ -243,7 +243,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="B0k-rB-Afs">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minimumValue="0.10000000000000001" maximumValue="100" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="B0k-rB-Afs">
                                 <rect key="frame" x="127" y="173" width="94" height="29"/>
                                 <connections>
                                     <action selector="stepperChanged:" destination="sun-om-mbd" eventType="valueChanged" id="5zU-yd-2Qc"/>
@@ -356,6 +356,6 @@
         <image name="window-code-3" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cEd-gx-hJG"/>
+        <segue reference="7x6-bW-viT"/>
     </inferredMetricsTieBreakers>
 </document>

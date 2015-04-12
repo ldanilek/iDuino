@@ -59,16 +59,9 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
     func addElement(program: ProgramElement?, remote: RemoteElement?) {
         if let theRemote = remote {
             var request = BluetoothRequest.bluetoothRequestWithType(theRemote.1)
-            if request.componentType == .None {
-                var noPin = UIAlertController(title: "All Available Pins Used", message: "Please free up a pin for \(textForType(theRemote.1))", preferredStyle: UIAlertControllerStyle.Alert)
-                noPin.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(noPin, animated: true, completion: nil)
-            }else {
                 var newRemote: InternalRemoteElt = (theRemote.0, request)
                 self.remote.append(newRemote)
                 self.tableView.reloadData()
-            }
-            
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -88,9 +81,8 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         
         //said component does not exist
         if remoteElt.request.componentType == .None {
-            // out of assignable pins, act accordingly
-            var nopinAlert = UIAlertController(title: "No More Pin Available", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            nopinAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            println("Component None")
+            return
         }
         sendByteString(remoteElt.request.generateByteString())
     }
@@ -107,8 +99,8 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         //said component does not exist
         if remoteElt.request.componentType == .None {
             // out of assignable pins, act accordingly
-            var nopinAlert = UIAlertController(title: "No More Pin Available", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            nopinAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            println("Componenent None")
+            return
         }
         
         sendByteString(remoteElt.request.generateByteString())
@@ -127,8 +119,8 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         //said component does not exist
         if remoteElt.request.componentType == .None {
             // out of assignable pins, act accordingly
-            var nopinAlert = UIAlertController(title: "No More Pin Available", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            nopinAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            println("Component None")
+            return
         }
         
         sendByteString(remoteElt.request.generateByteString())
@@ -143,8 +135,8 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         //said component does not exist
         if remoteElt.request.componentType == .None {
             // out of assignable pins, act accordingly
-            var nopinAlert = UIAlertController(title: "No More Pin Available", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            nopinAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            println("Component None")
+            return
         }
         
         sendByteString(remoteElt.request.generateByteString())
@@ -154,7 +146,7 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
         println("Sending byte string: \(pad(String(byteString, radix: 2), 8))")
         // Is the instructino already running?
         if byteString == currentInstruction {
-            println("no sig sent")
+            println("Current Inst again")
            return
         }
         
@@ -164,6 +156,42 @@ class RemoteTableViewController: UITableViewController, AddModalProtocol {
             currentInstruction = byteString;
             
         }
+    }
+    
+    func showReassignablePins(index: NSIndexPath) {
+        let alertController = UIAlertController(title: nil, message: nil,
+            preferredStyle: .ActionSheet)
+        alertController.popoverPresentationController?.sourceView = self.view
+        alertController.popoverPresentationController?.sourceRect = CGRectMake(self.view.bounds.width / 2.0, self.view.bounds.height / 2.0, 1.0, 1.0)
+        
+        var request = self.remote[index.row].request
+        var pins: [BluetoothRequest.Pin] = []
+        switch request.componentType {
+        case .LED:
+            pins = BluetoothRequest.allLED
+        case .Servo:
+            pins = BluetoothRequest.allServo
+        case .Sound:
+            pins = BluetoothRequest.allSound
+        case .None:
+            break;
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        for pin in pins {
+            var pinAction = UIAlertAction(title: BluetoothRequest.stringForPin(pin), style: .Default, handler: { _ in
+                
+                self.remote[index.row].request.pin = pin
+                self.tableView.reloadData()
+                
+                
+            })
+            alertController.addAction(pinAction)
+        }
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     
