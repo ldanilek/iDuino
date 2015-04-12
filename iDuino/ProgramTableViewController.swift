@@ -197,11 +197,6 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         if indexPath.row == self.program.count {
             let cell = tableView.dequeueReusableCellWithIdentifier("RepeatCell", forIndexPath: indexPath) as! UITableViewCell
             var repeatLabel: UILabel? = cell.contentView.viewWithTag(200) as? UILabel
-            if repeatLabel?.text == "Repeat" {
-                cell.backgroundColor = UIColor.orangeColor()
-            } else {
-                cell.backgroundColor = UIColor.whiteColor()
-            }
             
             return cell
             
@@ -219,7 +214,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
             var durationLabel: UILabel? = cell.contentView.viewWithTag(102) as? UILabel
             var text = NSString(format: "%.1gs", self.program[indexPath.row].duration)
             durationLabel?.text = text as String
-            
+        
             var pinLabel: UILabel? = cell.contentView.viewWithTag(104) as? UILabel
             pinLabel?.text = "Pin: \(BluetoothRequest.stringForPin(request.pin))"
             
