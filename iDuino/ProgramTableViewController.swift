@@ -188,11 +188,6 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
     self.showReassignablePins(request)
   }
   
-  func reassignPin(pin: BluetoothRequest.Pin, inout request: BluetoothRequest) {
-    request.pin = pin
-    self.tableView.reloadData()
-  }
-  
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete method implementation.
     // Return the number of rows in the section.
