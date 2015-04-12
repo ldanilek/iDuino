@@ -2,18 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "window-code-3.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "window-code-3-1.png"
+      "filename" : "window-code-3.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "window-code-3-2.png"
+      "filename" : "window-code-3-1.png"
     }
   ],
   "info" : {
