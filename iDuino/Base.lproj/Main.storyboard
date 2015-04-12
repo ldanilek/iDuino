@@ -233,14 +233,18 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RepeatCell" rowHeight="44" id="rVh-KW-5O1">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RepeatCell" rowHeight="100" id="rVh-KW-5O1">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rVh-KW-5O1" id="g4d-Df-AfG">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9b0-qE-qm0">
-                                            <rect key="frame" x="276" y="8" width="49" height="30"/>
-                                            <state key="normal" title="Repeat">
+                                            <rect key="frame" x="275" y="26" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="TCL-G2-9eK"/>
+                                                <constraint firstAttribute="width" constant="50" id="fEG-Du-gYa"/>
+                                            </constraints>
+                                            <state key="normal" backgroundImage="arrow-repeat-two-7">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -447,6 +451,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow-repeat-two-7" width="30" height="30"/>
         <image name="setting-gears-2" width="30" height="30"/>
         <image name="wireless-signal" width="30" height="30"/>
     </resources>
