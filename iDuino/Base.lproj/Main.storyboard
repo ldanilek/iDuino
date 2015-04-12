@@ -212,6 +212,9 @@
                                             <state key="normal" title="Repeat">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="repeatButtonPressed:" destination="17A-hg-cTw" eventType="touchUpInside" id="RQd-fS-ZyN"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
