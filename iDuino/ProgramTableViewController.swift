@@ -281,7 +281,7 @@ class ProgramTableViewController: UITableViewController, AddModalProtocol {
         if editingStyle == .Delete {
             // Delete the row from the data source
             program.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.reloadData()
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
